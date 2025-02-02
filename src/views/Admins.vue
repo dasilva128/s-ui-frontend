@@ -13,9 +13,15 @@
     :actor="changesModal.actor"
     @close="closeChangesModal"
   />
+  <TokenModal 
+    v-model="tokenModal.visible"
+    :visible="tokenModal.visible"
+    @close="closeTokenModal"
+  />
   <v-row>
     <v-col cols="12" justify="center" align="center">
-      <v-btn color="primary" @click="showChangesModal('')">{{ $t('admin.changes') }}</v-btn>
+      <v-btn color="primary" @click="showChangesModal('')" style="margin: 0 5px;">{{ $t('admin.changes') }}</v-btn>
+      <v-btn color="primary" @click="showTokenModal()">{{ $t('admin.api.token') }}</v-btn>
     </v-col>
   </v-row>
   <v-row>
@@ -63,6 +69,7 @@
 <script lang="ts" setup>
 import AdminModal from '@/layouts/modals/Admin.vue'
 import ChangeModal  from '@/layouts/modals/Changes.vue'
+import TokenModal from '@/layouts/modals/Token.vue'
 import { i18n } from '@/locales'
 import HttpUtils from '@/plugins/httputil'
 import { Ref, ref, inject, onMounted } from 'vue'
@@ -136,5 +143,15 @@ const showChangesModal = (actor: string) => {
 const closeChangesModal = () => {
   changesModal.value.visible = false
   changesModal.value.actor = ''
+}
+
+const tokenModal = ref({
+  visible: false,
+})
+const showTokenModal = () => {
+  tokenModal.value.visible = true
+}
+const closeTokenModal = () => {
+  tokenModal.value.visible = false
 }
 </script>

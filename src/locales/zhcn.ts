@@ -137,6 +137,11 @@ export default {
     actor: "执行者",
     key: "键",
     action: "操作",
+    api: {
+      title: "API 令牌",
+      msg: "请复制令牌并保存到安全的地方。它将不再显示。",
+      token: "令牌",
+    },
   },
   setting: {
     interface: "界面",

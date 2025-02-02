@@ -1,3 +1,5 @@
+import api from "@/plugins/api";
+
 export default {
   message: "Welcome",
   success: "success",
@@ -137,6 +139,11 @@ export default {
     actor: "Actor",
     key: "Key",
     action: "Action",
+    api: {
+      title: "API Tokens",
+      msg: "Please copy the token below and store it somewhere safe. It will not be shown again.",
+      token: "Token",
+    },
   },
   setting: {
     interface: "Interface",

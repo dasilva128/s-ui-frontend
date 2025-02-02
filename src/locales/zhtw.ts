@@ -138,6 +138,11 @@ export default {
     actor: "執行者",
     key: "鍵",
     action: "操作",
+    api: {
+      title: "API 憑據",
+      msg: "請複製下面的憑據並儲存在安全的地方。它將不再顯示。",
+      token: "憑據",
+    },
   },
   setting: {
     interface: "界面",

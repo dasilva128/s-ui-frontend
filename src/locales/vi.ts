@@ -137,6 +137,11 @@ export default {
     actor: "Diễn viên",
     key: "Khóa",
     action: "Hành động",
+    api: {
+      title: "Mã thông báo API",
+      msg: "Vui lòng sao chép mã thông báo bên dưới và lưu trữ nó ở nơi an toàn. Nó sẽ không được hiển thị lại.",
+      token: "Mã thông báo"
+    },
   },
   setting: {
     interface: "Giao diện",
