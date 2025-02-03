@@ -57,6 +57,7 @@ export interface rule extends generalRule {
   port_range?: string[]
   process_name?: string[]
   process_path?: string[]
+  process_path_regex?: string[]
   package_name?: string[]
   user?: string[]
   user_id?: number[]

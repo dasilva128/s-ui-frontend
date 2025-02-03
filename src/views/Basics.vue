@@ -57,6 +57,33 @@
               v-model="appConfig.dns.strategy">
             </v-select>
           </v-col>
+          <v-col cols="12" sm="6" md="3" lg="2">
+            <v-text-field
+              v-model="appConfig.dns.client_subnet" hide-details
+              clearable @click:clear="delete appConfig.dns.client_subnet"
+              label="Client Subnet"></v-text-field>
+          </v-col>
+          <v-col cols="auto">
+            <v-text-field
+              v-model.number="appConfig.dns.cache_capacity"
+              type="number" min="0" hide-details
+              clearable @click:clear="delete appConfig.dns.cache_capacity"
+              label="Cache Capacity"></v-text-field>
+          </v-col>
+          <v-col cols="auto">
+            <v-chechkbox v-model="appConfig.dns.disable_cache" hide-details label="Disable Cache" />
+          </v-col>
+          <v-col cols="auto">
+            <v-checkbox v-model="appConfig.dns.disable_expire" hide-details label="Disable Expire" />
+          </v-col>
+          <v-col cols="auto">
+            <v-checkbox v-model="appConfig.dns.independent_cache" hide-details label="Independent Cache" />
+          </v-col>
+          <v-col cols="auto">
+            <v-checkbox v-model="appConfig.dns.reverse_mapping" hide-details label="Reverse Mapping" />
+          </v-col>
+        </v-row>
+        <v-row>
           <v-col cols="12" sm="6" md="3" lg="2" align-self="center">
             <v-btn @click="addDnsServer" rounded>
               <v-icon icon="mdi-plus" />{{ $t('basic.dns.server') }}

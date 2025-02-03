@@ -1,5 +1,3 @@
-import api from "@/plugins/api";
-
 export default {
   message: "Welcome",
   success: "success",
@@ -88,6 +86,7 @@ export default {
     endpoint: "Endpoint",
     config: "Config",
     rule: "Rule",
+    dnsrule: "DNS Rule",
     user: "User",
     tag: "Tag",
     listen: "Listen",
@@ -351,6 +350,10 @@ export default {
     interval: "Update Intervals",
     remote: "Remote",
     local: "Local",
+  },
+  dnsrule: {
+    add: "Add Dns Rule",
+    title: "Dns Rules",
   },
   basic: {
     log: {

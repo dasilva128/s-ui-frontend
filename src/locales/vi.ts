@@ -86,6 +86,7 @@ export default {
     endpoint: "Điểm cuối",
     config: "Câu hình",
     rule: "Quy tắc",
+    dnsrule: "Quy tắc DNS",
     user: "Người dùng",
     tag: "Thẻ",
     listen: "Nghe",
@@ -350,6 +351,10 @@ export default {
     interval: "Khoảng cách Cập nhật",
     remote: "Xa",
     local: "Cục bộ",
+  },
+  dnsrule: {
+    add: "Thêm Quy tắc DNS",
+    title: "Quy tắc DNS",
   },
   basic: {
     log: {

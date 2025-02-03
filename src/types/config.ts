@@ -1,3 +1,4 @@
+import { dnsRule } from './dnsrules'
 import { Inbound } from './inbounds'
 import { Dial, Outbound } from './outbounds'
 
@@ -10,8 +11,15 @@ interface Log {
 
 interface Dns {
   servers: DnsServer[]
+  rules: dnsRule[]
   final?: string
   strategy?: string
+  disable_cache?: boolean,
+  disable_expire?: boolean,
+  independent_cache?: boolean,
+  cache_capacity?: number,
+  reverse_mapping?: boolean,
+  client_subnet?: string,
 }
 
 interface DnsServer{

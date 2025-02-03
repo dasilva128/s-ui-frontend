@@ -86,6 +86,7 @@ export default {
     endpoint: "درگاه",
     config: "پیکربندی",
     rule: "قانون",
+    dnsrule: "قانون دامنه",
     user: "کاربر",
     tag: "برچسب",
     listen: "گوش‌دادن",
@@ -349,6 +350,10 @@ export default {
     interval: "بازه بروزرسانی‌ها",
     remote: "راه دور",
     local: "محلی",
+  },
+  dnsrule: {
+    add: "ایجاد قانون دامنه",
+    title: "قانون دامنه",
   },
   basic: {
     log: {

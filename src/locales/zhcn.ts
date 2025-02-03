@@ -86,6 +86,7 @@ export default {
     endpoint: "节点",
     config: "配置",
     rule: "规则",
+    dnsrule: "DNS规则",
     user: "用户",
     tag: "标签",
     listen: "监听",
@@ -349,6 +350,10 @@ export default {
     interval: "更新间隔",
     remote: "远程",
     local: "本地",
+  },
+  dnsrule: {
+    add: "添加 DNS 规则",
+    title: "DNS 规则"
   },
   basic: {
     log: {

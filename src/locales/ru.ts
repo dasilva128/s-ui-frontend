@@ -86,6 +86,7 @@ export default {
     endpoint: "Точка входа",
     config: "Настройки",
     rule: "Правило",
+    dnsrule: "Правило DNS",
     user: "Пользователь",
     tag: "Тег",
     listen: "Прослушивание",
@@ -349,6 +350,10 @@ export default {
     interval: "Интервалы обновления",
     remote: "Удаленный",
     local: "Локальный",
+  },
+  dnsrule: {
+    add: "Добавить правило DNS",
+    title: "Правила DNS"
   },
   basic: {
     log: {
