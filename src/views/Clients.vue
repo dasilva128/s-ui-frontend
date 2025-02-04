@@ -141,17 +141,26 @@
           </span>
         </template>
         <template v-slot:item.volume="{ item }">
-          <div class="text-start">
+          <div class="text-start" v-tooltip:top="$t('stats.usage') + ': ' + HumanReadable.sizeFormat(item.up + item.down)">
             <v-chip
               size="small"
+              :color="(item.volume>0 && item.volume<=(item.up + item.down))? 'error': ''"
               label
             >{{ item.volume == 0 ? $t('unlimited') : HumanReadable.sizeFormat(item.volume) }}</v-chip>
           </div>
+          <v-progress-linear
+            :model-value="percent(item)"
+            :color="percentColor(item)"
+            v-if="item.volume>0"
+            bottom
+          >
+          </v-progress-linear>
         </template>
         <template v-slot:item.expiry="{ item }">
           <div class="text-start">
             <v-chip
               size="small"
+              :color="(item.expiry>0 && item.expiry<=Date.now()/1000)? 'error': ''"
               label
             >{{ HumanReadable.remainedDays(item.expiry) }}</v-chip>
           </div>
@@ -277,7 +286,7 @@ const headers = [
   { title: i18n.global.t('client.desc'), key: 'desc' },
   { title: i18n.global.t('client.group'), key: 'group' },
   { title: i18n.global.t('pages.inbounds'), key: 'inbounds', width: 10 },
-  { title: i18n.global.t('actions.action'), key: 'actions', sortable: false},
+  { title: i18n.global.t('actions.action'), key: 'actions', sortable: false },
   { title: i18n.global.t('stats.volume'), key: 'volume' },
   { title: i18n.global.t('date.expiry'), key: 'expiry' },
   { title: i18n.global.t('online'), key: 'online' },
@@ -417,4 +426,8 @@ const saveBulk = async (bulkClients: Client[]) => {
   const success = await Data().save("clients", "addbulk", bulkClients)
   if (success) closeBulk()
 }
+
+const percent = (c: Client) => { return c.volume>0 ? Math.round((c.up+c.down) *100 / c.volume) : 0 }
+const percentColor = (c: Client) => { return (c.up+c.down) >= c.volume ? 'error' : percent(c)>90 ? 'warning' : 'success' }
+
 </script>
