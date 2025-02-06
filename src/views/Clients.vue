@@ -293,11 +293,10 @@ const headers = [
   { key: 'data-table-group', width: 0 },
 ]
 
-const itemPerPage = computed(() => {
-  return localStorage.getItem('items-per-page') || 10
-})
+const itemPerPage = ref(localStorage.getItem('items-per-page') || '10')
 
 const setItemPerPage = (items: number) => {
+  itemPerPage.value = items.toString()
   localStorage.setItem('items-per-page', items.toString())
 }
 
