@@ -40,11 +40,11 @@ const Data = defineStore('Data', {
       this.lastLoad = Math.floor((new Date()).getTime()/1000)
       if (data.subURI) this.subURI = data.subURI
       if (data.config) this.config = data.config
-      if (data.clients) this.clients = data.clients
-      if (data.inbounds) this.inbounds = data.inbounds
-      if (data.outbounds) this.outbounds = data.outbounds
-      if (data.endpoints) this.endpoints = data.endpoints
-      if (data.tls) this.tlsConfigs = data.tls
+      if (Object.hasOwn(data, 'clients')) this.clients = data.clients ?? []
+      if (Object.hasOwn(data, 'inbounds')) this.inbounds = data.inbounds ?? []
+      if (Object.hasOwn(data, 'outbounds')) this.outbounds = data.outbounds ?? []
+      if (Object.hasOwn(data, 'endpoints')) this.endpoints = data.endpoints ?? []
+      if (Object.hasOwn(data, 'tls')) this.tlsConfigs = data.tls ?? []
     },
     async loadInbounds(ids: number[]): Promise<Inbound[]> {
       const options = ids.length > 0 ? {id: ids.join(",")} : {}

@@ -136,15 +136,15 @@
         </template>
         <v-card>
           <v-list>
+            <v-list-item>
+              <v-switch v-model="optionObfs" color="primary" :label="$t('types.hy.obfs')" hide-details></v-switch>
+            </v-list-item>
             <template v-if="direction == 'in'">
               <v-list-item>
                 <v-switch v-model="optionMasq" color="primary" label="Masquerade" hide-details></v-switch>
               </v-list-item>
             </template>
             <template v-else>
-              <v-list-item>
-                <v-switch v-model="optionObfs" color="primary" :label="$t('types.hy.obfs')" hide-details></v-switch>
-              </v-list-item>
               <v-list-item>
                 <v-switch v-model="optionMPort" color="primary" :label="$t('rule.portRange')" hide-details></v-switch>
               </v-list-item>
