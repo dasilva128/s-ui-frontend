@@ -154,7 +154,7 @@ export default {
           "auto_route": true,
           "strict_route": false,
           "endpoint_independent_nat": false,
-          "stack": "system",
+          "stack": "mixed",
           "exclude_package": [],
           "platform": {
             "http_proxy": {

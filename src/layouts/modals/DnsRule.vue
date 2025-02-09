@@ -191,7 +191,6 @@ export default {
       }
     },
     closeModal() {
-      this.updateData() // reset
       this.$emit('close')
     },
     saveChanges() {

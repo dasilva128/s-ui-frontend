@@ -26,7 +26,7 @@
                 <v-tooltip activator="parent" dir="ltr" location="bottom">
                   <span v-for="i in tlsInbounds(item.id)">{{ i }}<br /></span>
                 </v-tooltip>
-                {{ tlsInbounds.length }}
+                {{ tlsInbounds(item.id).length }}
               </template>
               <template v-else>-</template>
             </v-col>

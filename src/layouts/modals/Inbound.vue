@@ -222,7 +222,7 @@ export default {
           case 'group':
             clientIds = this.clients.filter((c:any) => this.initUsers.values.includes(c.group)).map((c:any) => c.id)
             break
-          case 'user':
+          case 'client':
             clientIds = this.initUsers.values
         }
         this.$emit('save', this.inbound, clientIds.length > 0 ? clientIds : undefined)
