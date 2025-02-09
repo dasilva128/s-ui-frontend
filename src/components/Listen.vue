@@ -1,6 +1,6 @@
 <template>
   <v-card :subtitle="$t('objects.listen')">
-    <v-row v-if="inbound.type != 'tun'">
+    <v-row>
       <v-col cols="12" sm="6" md="4">
         <v-text-field
         :label="$t('in.addr')"
@@ -52,7 +52,7 @@
         v-model.number="udpTimeout"></v-text-field>
       </v-col>
     </v-row>
-    <v-card-actions class="pt-0" v-if="inbound.type != 'tun'">
+    <v-card-actions class="pt-0">
       <v-spacer></v-spacer>
       <v-menu v-model="menu" :close-on-content-click="false" location="start">
         <template v-slot:activator="{ props }">

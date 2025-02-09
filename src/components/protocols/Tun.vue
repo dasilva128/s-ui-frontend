@@ -7,7 +7,7 @@
     </v-row>
     <v-row>
       <v-col cols="12" sm="6" md="4">
-        <v-text-field v-model="data.interface_name" :label="$t('types.tun.ifName')" hide-details></v-text-field>
+        <v-text-field v-model="data.interface_name" :label="$t('types.tun.ifName')" hide-details clearable @click:clear="delete data.interface_name"></v-text-field>
       </v-col>
       <v-col cols="12" sm="6" md="4">
         <v-text-field type="number" v-model.number="data.mtu" label="MTU" hide-details></v-text-field>

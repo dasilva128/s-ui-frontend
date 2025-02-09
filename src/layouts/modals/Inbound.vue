@@ -39,7 +39,7 @@
           </v-tabs>
           <v-window v-model="side" style="margin-top: 10px;">
             <v-window-item value="s">
-              <Listen :inbound="inbound" :inTags="inTags" />
+              <Listen :inbound="inbound" :inTags="inTags" v-if="inbound.type != inTypes.Tun" />
               <Direct v-if="inbound.type == inTypes.Direct" :data="inbound" />
               <Shadowsocks v-if="inbound.type == inTypes.Shadowsocks" direction="in" :data="inbound" />
               <Hysteria v-if="inbound.type == inTypes.Hysteria" direction="in" :data="inbound" />
