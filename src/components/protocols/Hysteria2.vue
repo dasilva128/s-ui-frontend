@@ -21,20 +21,20 @@
         v-model.number="down_mbps">
         </v-text-field>
       </v-col>
+      <v-col cols="12" sm="6" md="4" v-if="direction == 'in'">
+        <v-switch v-model="data.ignore_client_bandwidth" color="primary" :label="$t('types.hy.ignoreBw')" hide-details></v-switch>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12" sm="6" md="4" v-if="data.obfs != undefined">
+      <v-text-field
+        :label="$t('types.hy.obfs')"
+        hide-details
+        v-model="data.obfs.password">
+        </v-text-field>
+      </v-col>
     </v-row>
     <template v-if="direction == 'in'">
-      <v-row>
-        <v-col cols="12" sm="6" md="4">
-          <v-switch v-model="data.ignore_client_bandwidth" color="primary" :label="$t('types.hy.ignoreBw')" hide-details></v-switch>
-        </v-col>
-        <v-col cols="12" sm="6" md="4" v-if="data.obfs != undefined">
-        <v-text-field
-          :label="$t('types.hy.obfs')"
-          hide-details
-          v-model="data.obfs.password">
-          </v-text-field>
-        </v-col>
-      </v-row>
       <v-card subtitle="Hysteria2 Masquerade" v-if="data.masquerade != undefined">
         <v-row>
           <v-col cols="12" sm="6" md="4">
@@ -117,6 +117,15 @@
             v-model="server_ports">
           </v-text-field>
         </v-col>
+        <v-col cols="12" sm="6" md="4" v-if="optionMPort">
+          <v-text-field
+            :label="$t('ruleset.interval')"
+            type="number"
+            min="0"
+            :suffix="$t('date.s')"
+            v-model.number="hop_interval">
+          </v-text-field>
+        </v-col>
       </v-row>
     </template>
     <v-card-actions>
@@ -129,13 +138,13 @@
           <v-list>
             <template v-if="direction == 'in'">
               <v-list-item>
-                <v-switch v-model="optionObfs" color="primary" :label="$t('types.hy.obfs')" hide-details></v-switch>
-              </v-list-item>
-              <v-list-item>
                 <v-switch v-model="optionMasq" color="primary" label="Masquerade" hide-details></v-switch>
               </v-list-item>
             </template>
             <template v-else>
+              <v-list-item>
+                <v-switch v-model="optionObfs" color="primary" :label="$t('types.hy.obfs')" hide-details></v-switch>
+              </v-list-item>
               <v-list-item>
                 <v-switch v-model="optionMPort" color="primary" :label="$t('rule.portRange')" hide-details></v-switch>
               </v-list-item>
@@ -187,6 +196,10 @@ export default {
           this.$props.data.masquerade = { type: v }
         }
       }
+    },
+    hop_interval: {
+      get() { return this.$props.data.hop_interval? parseInt(this.$props.data.hop_interval.replace('s','')) : 0 },
+      set(v:number) { this.$props.data.hop_interval = v>0 ? v + 's' : undefined }
     },
     optionObfs: {
       get(): boolean { return this.$props.data.obfs != undefined },
