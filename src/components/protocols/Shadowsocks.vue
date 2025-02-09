@@ -17,7 +17,7 @@
         <UoT :data="data" />
       </v-col>
     </v-row>
-    <v-row v-if="data.method.startsWith('2022') || direction == 'out'">
+    <v-row v-if="data.method != 'none' || direction == 'out'">
       <v-col cols="12" sm="8">
         <v-text-field
           v-model="data.password"
@@ -57,8 +57,10 @@ export default {
     changeMethod(ssMethod :string) {
       if (ssMethod.startsWith('2022')) {
         this.$props.data.password = ssMethod == "2022-blake3-aes-128-gcm" ? RandomUtil.randomShadowsocksPassword(16) : RandomUtil.randomShadowsocksPassword(32)
+      } else if (ssMethod == 'none') {
+        delete this.$props.data.password
       } else {
-        this.$props.data.password = ''
+        this.$props.data.password = RandomUtil.randomSeq(10)
       }
     }
   },
