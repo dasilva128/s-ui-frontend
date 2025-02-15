@@ -320,8 +320,8 @@ export default {
           this.subJsonExt.rules.unshift({ protocol: "dns", action: "hijack-dns" })
         } else {
           delete this.subJsonExt.dns
-          const ruleDnsIndex = this.subJsonExt?.rules?.findIndex((r:any) => r.protocol == "dns" && r.action == "hijack-dns")
-          if (ruleDnsIndex >= 0) this.subJsonExt.rules.splice(ruleDnsIndex,1)
+          const rules = this.subJsonExt?.rules?.filter((r:any) => r.protocol != "dns") ?? []
+          if (rules.length >= 0) this.subJsonExt.rules = rules
           if (this.rules.length == 0) delete this.subJsonExt.rules
         }
       }
