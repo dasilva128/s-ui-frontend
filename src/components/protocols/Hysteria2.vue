@@ -1,7 +1,10 @@
 <template>
   <v-card subtitle="Hysteria2">
-    <v-row v-if="!data.ignore_client_bandwidth">
-      <v-col cols="12" sm="6" md="4">
+    <v-row>
+      <v-col cols="12" sm="6" md="4" v-if="direction == 'in'">
+        <v-switch v-model="data.ignore_client_bandwidth" color="primary" :label="$t('types.hy.ignoreBw')" hide-details></v-switch>
+      </v-col>
+      <v-col cols="12" sm="6" md="4" v-if="!data.ignore_client_bandwidth">
         <v-text-field
         :label="$t('stats.upload')"
         hide-details
@@ -11,7 +14,7 @@
         v-model.number="up_mbps">
         </v-text-field>
       </v-col>
-      <v-col cols="12" sm="6" md="4">
+      <v-col cols="12" sm="6" md="4" v-if="!data.ignore_client_bandwidth">
         <v-text-field
         :label="$t('stats.download')"
         hide-details
@@ -20,9 +23,6 @@
         min="0"
         v-model.number="down_mbps">
         </v-text-field>
-      </v-col>
-      <v-col cols="12" sm="6" md="4" v-if="direction == 'in'">
-        <v-switch v-model="data.ignore_client_bandwidth" color="primary" :label="$t('types.hy.ignoreBw')" hide-details></v-switch>
       </v-col>
     </v-row>
     <v-row>

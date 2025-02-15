@@ -71,7 +71,7 @@
               label="Cache Capacity"></v-text-field>
           </v-col>
           <v-col cols="auto">
-            <v-chechkbox v-model="appConfig.dns.disable_cache" hide-details label="Disable Cache" />
+            <v-checkbox v-model="appConfig.dns.disable_cache" hide-details label="Disable Cache" />
           </v-col>
           <v-col cols="auto">
             <v-checkbox v-model="appConfig.dns.disable_expire" hide-details label="Disable Expire" />
