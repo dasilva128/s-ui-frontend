@@ -22,7 +22,12 @@ import vuetify from '@/plugins/vuetify'
 const Theme = useTheme()
 
 const theme = computed(() =>{
-  return Theme.global.name.value == "light" ? pastelTheme : darkTheme
+  let currenTheme = Theme.global.name.value == "light" ? pastelTheme : darkTheme
+  currenTheme = {
+    ...currenTheme,
+    '--nv-width': 'auto',
+  }
+  return currenTheme
 })
 
 const direction = computed(() => {
