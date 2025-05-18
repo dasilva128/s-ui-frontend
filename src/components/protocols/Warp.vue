@@ -31,12 +31,26 @@
         </tbody>
       </table>
       <v-card :subtitle="$t('types.wg.peer')">
+        <v-row>
+          <v-col cols="12" sm="6">
+            <v-text-field
+              :label="$t('out.addr')"
+              hide-details
+              v-model="data.peers[0].address">
+            </v-text-field>
+          </v-col>
+          <v-col cols="12" sm="6" md="4">
+            <v-text-field
+              :label="$t('out.port')"
+              hide-details
+              type="number"
+              min=1
+              v-model.number="data.peers[0].port">
+            </v-text-field>
+          </v-col>
+        </v-row>
         <table dir="ltr" width="100%">
           <tbody>
-            <tr>
-              <td>{{ $t('out.addr') }}</td>
-              <td>{{ data.peers[0].address + ":" + data.peers[0].port }}</td>
-            </tr>
             <tr>
               <td>{{ $t('types.wg.pubKey') }}</td>
               <td>{{ data.peers[0].public_key }}</td>
