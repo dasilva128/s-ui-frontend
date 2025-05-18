@@ -126,8 +126,11 @@ export default {
     }
   },
   methods: {
-    addPeer() { 
-      this.$props.data.peers.push(this.$props.data.peers[0])
+    addPeer() {
+      this.$props.data.peers.push({
+        public_key: '',
+        allowed_ips: ['0.0.0.0/0', '::/0']
+      })
     },
     newKey() {
       this.$emit('newWgKey')

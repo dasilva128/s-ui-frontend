@@ -86,7 +86,7 @@ export default {
           listen_port: port,
           private_key: wgKeys.private_key,
           peers: [{
-            public_key: (await this.genWgKey()).public_key,
+            public_key: '',
             allowed_ips: ['0.0.0.0/0', '::/0']
           }]
         })
