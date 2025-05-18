@@ -7,14 +7,6 @@
     </v-row>
     <template v-if="enabled">
       <v-row>
-        <v-col cols="12" sm="6" md="4">
-          <v-switch color="primary" label="Post-Quantum Schemes" v-model="ech.pq_signature_schemes_enabled" hide-details></v-switch>
-        </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-switch color="primary" label="Disable Adaptive Size" v-model="ech.dynamic_record_sizing_disabled" hide-details></v-switch>
-        </v-col>
-      </v-row>
-      <v-row>
         <v-col cols="auto">
           <v-btn-toggle v-model="useEchPath"
           class="rounded-xl"
@@ -95,7 +87,7 @@ export default {
       this.loading = true
       const msg = await HttpUtils.get('api/keypairs', {
         k: "ech",
-        o: this.iTls.server_name?? "''" + "," + this.iTls.ech.pq_signature_schemes_enabled?? false
+        o: this.iTls.server_name?? "''"
       })
       this.loading = false
       if (msg.success && this.iTls.ech && this.oTls.ech) {
