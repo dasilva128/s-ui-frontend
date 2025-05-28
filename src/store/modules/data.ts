@@ -14,6 +14,7 @@ const Data = defineStore('Data', {
     config: <any>{},
     inbounds: <any[]>[],
     outbounds: <any[]>[],
+    services: <any[]>[],
     endpoints: <any[]>[],
     clients: <any>[],
     tlsConfigs: <any[]>[],
@@ -43,6 +44,7 @@ const Data = defineStore('Data', {
       if (Object.hasOwn(data, 'clients')) this.clients = data.clients ?? []
       if (Object.hasOwn(data, 'inbounds')) this.inbounds = data.inbounds ?? []
       if (Object.hasOwn(data, 'outbounds')) this.outbounds = data.outbounds ?? []
+      if (Object.hasOwn(data, 'services')) this.services = data.services ?? []
       if (Object.hasOwn(data, 'endpoints')) this.endpoints = data.endpoints ?? []
       if (Object.hasOwn(data, 'tls')) this.tlsConfigs = data.tls ?? []
     },

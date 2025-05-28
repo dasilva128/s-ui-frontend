@@ -1,0 +1,153 @@
+<template>
+  <ServiceVue 
+    v-model="modal.visible"
+    :visible="modal.visible"
+    :id="modal.id"
+    :data="modal.data"
+    :inTags="inTags"
+    :outTags="outTags"
+    :tsTags="tsTags"
+    :ssTags="ssTags"
+    :tlsConfigs="tlsConfigs"
+    @close="closeModal"
+    @save="saveModal"
+  />
+  <v-row>
+    <v-col cols="12" justify="center" align="center">
+      <v-btn color="primary" @click="showModal(0)">{{ $t('actions.add') }}</v-btn>
+    </v-col>
+  </v-row>
+  <v-row>
+    <v-col cols="12" sm="4" md="3" lg="2" v-for="(item, index) in <any[]>services" :key="item.tag">
+      <v-card rounded="xl" elevation="5" min-width="200" :title="item.tag">
+        <v-card-subtitle style="margin-top: -20px;">
+          <v-row>
+            <v-col>{{ item.type }}</v-col>
+          </v-row>
+        </v-card-subtitle>
+        <v-card-text>
+          <v-row>
+            <v-col>{{ $t('in.addr') }}</v-col>
+            <v-col>
+              {{ item.listen }}
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>{{ $t('in.port') }}</v-col>
+            <v-col>
+              {{ item.listen_port }}
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>{{ $t('objects.tls') }}</v-col>
+            <v-col>
+              {{ item.tls_id > 0 ? $t('enable') : $t('disable') }}
+            </v-col>
+          </v-row>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions style="padding: 0;">
+          <v-btn icon="mdi-file-edit" @click="showModal(item.id)">
+            <v-icon />
+            <v-tooltip activator="parent" location="top" :text="$t('actions.edit')"></v-tooltip>
+          </v-btn>
+          <v-btn icon="mdi-file-remove" style="margin-inline-start:0;" color="warning" @click="delOverlay[index] = true">
+            <v-icon />
+            <v-tooltip activator="parent" location="top" :text="$t('actions.del')"></v-tooltip>
+          </v-btn>
+          <v-overlay
+            v-model="delOverlay[index]"
+            contained
+            class="align-center justify-center"
+          >
+            <v-card :title="$t('actions.del')" rounded="lg">
+              <v-divider></v-divider>
+              <v-card-text>{{ $t('confirm') }}</v-card-text>
+              <v-card-actions>
+                <v-btn color="error" variant="outlined" @click="delSrv(item.id)">{{ $t('yes') }}</v-btn>
+                <v-btn color="success" variant="outlined" @click="delOverlay[index] = false">{{ $t('no') }}</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-overlay>
+        </v-card-actions>
+      </v-card>      
+    </v-col>
+  </v-row>
+</template>
+
+<script lang="ts" setup>
+import { i18n } from '@/locales'
+import Data from '@/store/modules/data'
+import { Srv } from '@/types/services'
+import { push } from 'notivue'
+import { computed, ref } from 'vue'
+import ServiceVue from '@/layouts/modals/Service.vue'
+
+const services = computed((): Srv[] => {
+  return <Srv[]> Data().services
+})
+
+const srvTags = computed((): any[] => {
+  return services.value?.map((o:Srv) => o.tag)
+})
+
+const tsTags = computed((): any[] => {
+  return Data().endpoints?.filter((o:any) => o.type == "tailscale")?.map((o:any) => o.tag)
+})
+
+const ssTags = computed((): any[] => {
+  return Data().inbounds?.filter((o:any) => o.type == "shadowsocks" && o.managed)?.map((o:any) => o.tag)
+})
+
+const inTags = computed((): any[] => {
+  return Data().inbounds?.map((o:any) => o.tag).filter(t => t != null)
+})
+
+const outTags = computed((): any[] => {
+  return Data().outbounds?.map((o:any) => o.tag).filter(t => t != null)
+})
+
+const tlsConfigs = computed((): any[] => {
+  return <any[]> Data().tlsConfigs
+})
+
+const modal = ref({
+  visible: false,
+  id: 0,
+  data: "",
+})
+
+let delOverlay = ref(new Array<boolean>)
+
+const showModal = (id: number) => {
+  modal.value.id = id
+  modal.value.data = id == 0 ? '' : JSON.stringify(services.value.findLast(o => o.id == id))
+  modal.value.visible = true
+}
+
+const closeModal = () => {
+  modal.value.visible = false
+}
+const saveModal = async (data:Srv) => {
+  // Check duplicate tag
+  const oldTag = modal.value.id > 0  ? services.value.findLast(i => i.id == modal.value.id)?.tag : null
+  if (data.tag != oldTag && srvTags.value.includes(data.tag)) {
+    push.error({
+      message: i18n.global.t('error.dplData') + ": " + i18n.global.t('objects.tag')
+    })
+    return
+  }
+
+  // save data
+  const success = await Data().save("services", modal.value.id == 0 ? "new" : "edit", data)
+  if (success) modal.value.visible = false
+}
+
+const delSrv = async (id: number) => {
+  const index = services.value.findIndex(i => i.id == id)
+  const tag = services.value[index].tag
+
+  const success = await Data().save("services", "del", tag)
+  if (success) delOverlay.value[index] = false
+}
+</script>
