@@ -297,7 +297,7 @@ export default {
     bindIp6: "Ràng buộc tới IPv6",
     reuseAddr: "Sử dụng lại Địa chỉ Nghe",
     connTimeout: "Thời gian Chờ Kết nối",
-    fbTimeout: "Thời gian Chờ Fallback",
+    domainResolver: "Trình phân giải Tên miền",
     options: "Tùy chọn Gọi",
     detourText: "Chuyển tiếp tới thư đi",
   },

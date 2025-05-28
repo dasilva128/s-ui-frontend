@@ -297,7 +297,7 @@ export default {
     bindIp6: "Привязка к IPv6",
     reuseAddr: "Повторное использование адреса слушателя",
     connTimeout: "Таймаут подключения",
-    fbTimeout: "Таймаут возврата",
+    domainResolver: "Разрешение домена",
     options: "Параметры вызова",
     detourText: "Переадресация на исходящий",
   },

@@ -297,7 +297,7 @@ export default {
     bindIp6: "绑定到 IPv6",
     reuseAddr: "重用监听地址",
     connTimeout: "连接超时",
-    fbTimeout: "回退超时",
+    domainResolver: "域名解析器",
     options: "拨号选项",
     detourText: "转发至出站",
   },

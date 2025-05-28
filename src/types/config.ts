@@ -1,6 +1,7 @@
 import { dnsRule } from './dnsrules'
 import { Inbound } from './inbounds'
-import { Dial, Outbound } from './outbounds'
+import { Outbound } from './outbounds'
+import { Dial } from './dial'
 
 interface Log {
   disabled?: boolean

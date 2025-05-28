@@ -9,6 +9,6 @@ export interface Dial {
   tcp_fast_open?: boolean
   tcp_multi_path?: boolean
   udp_fragment?: boolean
-  domain_strategy?: string
   fallback_delay?: string
+  domain_resolver?: string | any
 }

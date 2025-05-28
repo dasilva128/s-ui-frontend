@@ -297,7 +297,7 @@ export default {
     bindIp6: "اتصال به IPv6",
     reuseAddr: "استفاده مجدد از آدرس",
     connTimeout: "مهلت ارتباط",
-    fbTimeout: "مهلت فالبک",
+    domainResolver: "حل‌کننده دامنه",
     options: "گزینه‌های تماس",
     detourText: "ارسال به خروجی دیگر",
   },

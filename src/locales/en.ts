@@ -297,7 +297,7 @@ export default {
     bindIp6: "Bind to IPv6",
     reuseAddr: "Reuse Listener Address",
     connTimeout: "Connection Timeout",
-    fbTimeout: "Fallback Timeout",
+    domainResolver: "Domain Resolver",
     options: "Dial Options",
     detourText: "Forward to outbound",
   },

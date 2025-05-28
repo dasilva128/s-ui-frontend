@@ -65,24 +65,13 @@
         v-model.number="connectTimeout"></v-text-field>
       </v-col>
     </v-row>
-    <v-row v-if="optionDS">
-      <v-col cols="12" sm="6" md="4">
-        <v-select
-            hide-details
-            :label="$t('listen.domainStrategy')"
-            :items="['prefer_ipv4','prefer_ipv6','ipv4_only','ipv6_only']"
-            v-model="dial.domain_strategy">
-          </v-select>
-      </v-col>
+    <v-row v-if="optionDR">
       <v-col cols="12" sm="6" md="4">
         <v-text-field
-        :label="$t('dial.fbTimeout')"
-        hide-details
-        type="number"
-        min="50"
-        step="50"
-        :suffix="$t('date.ms')"
-        v-model.number="fallbackDelay"></v-text-field>
+          hide-details
+          :label="$t('dial.domainResolver')"
+          v-model="dial.domain_resolver">
+        </v-text-field>
       </v-col>
     </v-row>
     <v-card-actions class="pt-0">
@@ -121,7 +110,7 @@
               <v-switch v-model="optionCT" color="primary" :label="$t('dial.connTimeout')" hide-details></v-switch>
             </v-list-item>
             <v-list-item>
-              <v-switch v-model="optionDS" color="primary" :label="$t('listen.domainStrategy')" hide-details></v-switch>
+              <v-switch v-model="optionDR" color="primary" :label="$t('dial.domainResolver')" hide-details></v-switch>
             </v-list-item>
           </v-list>
         </v-card>
@@ -139,10 +128,6 @@ export default {
     }
   },
   computed: {
-    fallbackDelay: {
-      get() { return this.$props.dial.fallback_delay ? parseInt(this.$props.dial.fallback_delay.replace('ms','')) : 300 },
-      set(newValue:number) { this.$props.dial.fallback_delay = newValue > 0 ? newValue + 'ms' : '300ms' }
-    },
     connectTimeout: {
       get() { return this.$props.dial.connect_timeout ? parseInt(this.$props.dial.connect_timeout.replace('s','')) : 5 },
       set(newValue:number) { this.$props.dial.connect_timeout = newValue > 0 ? newValue + 's' : '5s' }
@@ -198,17 +183,9 @@ export default {
       get(): boolean { return this.$props.dial.connect_timeout != undefined },
       set(v:boolean) { v ? this.$props.dial.connect_timeout = '5s' : delete this.$props.dial.connect_timeout }
     },
-    optionDS: {
-      get(): boolean { return this.$props.dial.domain_strategy != undefined },
-      set(v:boolean) {
-        if (v) {
-          this.$props.dial.domain_strategy = 'prefer_ipv4'
-          this.$props.dial.fallback_delay = '300ms'
-        } else {
-          delete this.$props.dial.domain_strategy
-          delete this.$props.dial.fallback_delay
-        }
-      }
+    optionDR: {
+      get(): boolean { return this.$props.dial.domain_resolver != undefined },
+      set(v:boolean) { this.$props.dial.domain_resolver = v ?'local' : undefined }
     }
   }
 }

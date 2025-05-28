@@ -1,6 +1,6 @@
 import { iMultiplex } from "./multiplex"
 import { iTls } from "./tls"
-import { Dial } from "./outbounds"
+import { Dial } from "./dial"
 import { Transport } from "./transport"
 
 export const InTypes = {
