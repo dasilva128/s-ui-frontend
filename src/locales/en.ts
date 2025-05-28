@@ -277,6 +277,7 @@ export default {
     port: "Port",
     clients: "Enable Clients",
     ssMethod: "Method",
+    ssManageable: "Manageable",
     sSide: "Server Side",
     cSide: "Client Side",
     multiDomain: "Multi Domain",

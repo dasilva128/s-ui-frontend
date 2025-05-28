@@ -277,6 +277,7 @@ export default {
     port: "Порт",
     clients: "Включить клиентов",
     ssMethod: "Метод",
+    ssManageable: "Управляемый",
     sSide: "Сторона сервера",
     cSide: "Сторона клиента",
     multiDomain: "Мультидомен",

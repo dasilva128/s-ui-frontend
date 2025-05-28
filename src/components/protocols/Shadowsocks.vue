@@ -16,6 +16,14 @@
       <v-col cols="12" sm="6" md="4" v-if="direction == 'out'">
         <UoT :data="data" />
       </v-col>
+      <v-col cols="12" sm="6" md="4" v-if="direction == 'in'">
+        <v-switch
+          v-model="data.managed"
+          color="primary"
+          :label="$t('in.ssManageable')"
+          hide-details>
+        </v-switch>
+      </v-col>
     </v-row>
     <v-row v-if="data.method != 'none' || direction == 'out'">
       <v-col cols="12" sm="8">

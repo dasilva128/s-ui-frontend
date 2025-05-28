@@ -277,6 +277,7 @@ export default {
     port: "端口",
     clients: "启用客户端",
     ssMethod: "方法",
+    ssManageable: "可管理的",
     sSide: "服务器端",
     cSide: "客户端",
     multiDomain: "多域名",

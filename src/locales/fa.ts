@@ -277,6 +277,7 @@ export default {
     port: "پورت",
     clients: "فعال‌سازی کاربران",
     ssMethod: "روش",
+    ssManageable: "قابل مدیریت",
     sSide: "سمت سرور",
     cSide: "سمت کاربر",
     multiDomain: "دامنه چندگانه",

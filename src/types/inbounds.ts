@@ -70,6 +70,7 @@ export interface Shadowsocks extends InboundBasics {
   password: string
   network?: "udp" | "tcp"
   multiplex?: iMultiplex
+  managed?: boolean
 }
 export interface VMess extends InboundBasics {
   tls: iTls

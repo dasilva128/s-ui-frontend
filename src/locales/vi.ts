@@ -277,6 +277,7 @@ export default {
     port: "Cổng",
     clients: "Kích hoạt khách hàng",
     ssMethod: "Phương thức",
+    ssManageable: "Quản lý được",
     sSide: "Phía Máy chủ",
     cSide: "Phía Khách hàng",
     multiDomain: "Nhiều Tên miền",
