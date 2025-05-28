@@ -39,7 +39,7 @@
           </v-tabs>
           <v-window v-model="side" style="margin-top: 10px;">
             <v-window-item value="s">
-              <Listen :inbound="inbound" :inTags="inTags" v-if="inbound.type != inTypes.Tun" />
+              <Listen :data="inbound" :inTags="inTags" v-if="inbound.type != inTypes.Tun" />
               <Direct v-if="inbound.type == inTypes.Direct" :data="inbound" />
               <Shadowsocks v-if="inbound.type == inTypes.Shadowsocks" direction="in" :data="inbound" />
               <Hysteria v-if="inbound.type == inTypes.Hysteria" direction="in" :data="inbound" />
@@ -95,7 +95,7 @@
 </template>
 
 <script lang="ts">
-import { InTypes, createInbound, Addr, inboundWithUsers, ShadowTLS } from '@/types/inbounds'
+import { InTypes, createInbound, Addr, ShadowTLS } from '@/types/inbounds'
 import RandomUtil from '@/plugins/randomUtil'
 
 import Listen from '@/components/Listen.vue'
@@ -125,7 +125,7 @@ export default {
       loading: false,
       side: "s",
       inTypes: InTypes,
-      inboundWithUsers: inboundWithUsers,
+      inboundWithUsers: ['mixed', 'socks', 'http', 'shadowsocks', 'vmess', 'trojan', 'naive', 'hysteria', 'shadowtls', 'tuic', 'hysteria2', 'vless'],
       initUsers: {
         model: 'none',
         values: <any>[],
@@ -193,7 +193,7 @@ export default {
       // Tag change only in add inbound
       const tag = this.$props.id > 0 ? this.inbound.tag : this.inbound.type + "-" + this.inbound.listen_port
       // Use previous data
-      const prevConfig = { id: this.inbound.id, tag: tag ,listen: this.inbound.listen?? "::", listen_port: this.inbound.listen_port }
+      const prevConfig = { id: this.inbound.id, tag: tag, listen: this.inbound.listen?? "::", listen_port: this.inbound.listen_port }
       this.inbound = createInbound(this.inbound.type, this.inbound.type != this.inTypes.Tun ? prevConfig : { tag: tag })
       if (this.HasInData.includes(this.inbound.type)){
         this.inbound.addrs = []
@@ -245,7 +245,7 @@ export default {
     },
     hasUser() {
       if (this.$props.id > 0) return false
-      if (!inboundWithUsers.includes(this.inbound.type)) return false
+      if (!this.inboundWithUsers.includes(this.inbound.type)) return false
       if (this.inbound.type == InTypes.ShadowTLS && (<ShadowTLS>this.inbound).version < 3 ) return false
       return true
     }

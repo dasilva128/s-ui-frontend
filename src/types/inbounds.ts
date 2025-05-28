@@ -189,26 +189,6 @@ type InterfaceMap = {
 // Create union type from InterfaceMap
 export type Inbound = InterfaceMap[keyof InterfaceMap]
 
-type userEnabledTypes = {
-  mixed: Mixed
-  socks: SOCKS
-  http: SOCKS
-  shadowsocks: Shadowsocks
-  vmess: VMess
-  trojan: Trojan
-  naive: Naive
-  hysteria: Hysteria
-  shadowtls: ShadowTLS
-  tuic: TUIC
-  hysteria2: Hysteria2
-  vless: VLESS
-}
-
-export const inboundWithUsers = ['mixed', 'socks', 'http', 'shadowsocks', 'vmess', 'trojan', 'naive', 'hysteria', 'shadowtls', 'tuic', 'hysteria2', 'vless']
-
-// Create union type from userEnabledTypes
-type InboundWithUser = userEnabledTypes[keyof userEnabledTypes]
-
 // Create defaultValues object dynamically
 const defaultValues: Record<InType, Inbound> = {
   direct: <Direct>{ type: InTypes.Direct },

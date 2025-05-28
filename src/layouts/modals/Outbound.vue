@@ -159,7 +159,7 @@ export default {
       // Tag change only in add outbound
       const tag = this.$props.id > 0 ? this.outbound.tag : this.outbound.type + "-" + RandomUtil.randomSeq(3)
       // Use previous data
-      const prevConfig = { id: this.outbound.id, tag: tag ,listen: this.outbound.listen, listen_port: this.outbound.listen_port }
+      const prevConfig = { id: this.outbound.id, tag: tag, listen: this.outbound.listen, listen_port: this.outbound.listen_port }
       this.outbound = createOutbound(this.outbound.type, prevConfig)
     },
     closeModal() {
