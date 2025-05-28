@@ -45,8 +45,6 @@ export interface acme {
 
 export interface ech {
   enabled: boolean
-  pq_signature_schemes_enabled?: boolean
-  dynamic_record_sizing_disabled?: boolean
   key?: string[]
   key_path?: string
 }
