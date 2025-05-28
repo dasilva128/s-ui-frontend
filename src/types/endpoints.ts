@@ -1,8 +1,9 @@
-import { Dial } from "./outbounds"
+import { Dial } from "./dial"
 
 export const EpTypes = {
   Wireguard: 'wireguard',
   Warp: 'warp',
+  Tailscale: 'tailscale',
 }
 
 type EpType = typeof EpTypes[keyof typeof EpTypes]
@@ -29,14 +30,28 @@ export interface WireGuard extends EndpointBasics, Dial {
   mtu?: number
   address: string[]
   private_key: string
-  listen_port: number,
+  listen_port: number
   peers: WgPeer[]
-  udp_timeout?: string,
+  udp_timeout?: string
   workers?: number
 }
 
 export interface Warp extends WireGuard {
   ext: any
+}
+
+export interface Tailscale extends EndpointBasics, Dial {
+  state_directory?: string
+  auth_key?: string
+  control_url?: string
+  ephemeral?: boolean
+  hostname?: string
+  accept_routes?: boolean
+  exit_node?: string
+  exit_node_allow_lan_access?: boolean
+  advertise_routes?: string[]
+  advertise_exit_node?: boolean
+  udp_timeout?: string
 }
 
 // Create interfaces dynamically based on EpTypes keys
@@ -54,6 +69,7 @@ export type Endpoint = InterfaceMap[keyof InterfaceMap]
 const defaultValues: Record<EpType, Endpoint> = {
   wireguard: { type: EpTypes.Wireguard, address: ['10.0.0.2/32','fe80::2/128'], private_key: '', listen_port: 0, peers: [{ address: '', port: 0, public_key: ''}] },
   warp: { type: EpTypes.Warp, address: [], private_key: '', listen_port: 0, mtu: 1420, peers: [{ address: '', port: 0, public_key: ''}] },
+  tailscale: { type: EpTypes.Tailscale, domain_resolver: 'local' },
 }
 
 export function createEndpoint<T extends Endpoint>(type: string,json?: Partial<T>): Endpoint {

@@ -10,6 +10,7 @@
           <v-col cols="12" sm="6" md="4">
             <v-select
             hide-details
+            :disabled="endpoint.id > 0"
             :label="$t('type')"
             :items="Object.keys(epTypes).map((key,index) => ({title: key, value: Object.values(epTypes)[index]}))"
             v-model="endpoint.type"
@@ -22,6 +23,7 @@
         </v-row>
         <Wireguard v-if="endpoint.type == epTypes.Wireguard" :data="endpoint" :options="options" @getWgPubKey="getWgPubKey" @newWgKey="newWgKey" />
         <Warp v-if="endpoint.type == epTypes.Warp" :data="endpoint" />
+        <TailscaleVue v-if="endpoint.type == epTypes.Tailscale" :data="endpoint" />
         <Dial :dial="endpoint" :outTags="tags" />
       </v-card-text>
       <v-card-actions>
@@ -52,6 +54,7 @@ import RandomUtil from '@/plugins/randomUtil'
 import Dial from '@/components/Dial.vue'
 import Wireguard from '@/components/protocols/Wireguard.vue'
 import Warp from '@/components/protocols/Warp.vue'
+import TailscaleVue from '@/components/protocols/Tailscale.vue'
 import HttpUtils from '@/plugins/httputil'
 import { push } from 'notivue'
 import { i18n } from '@/locales'
@@ -77,29 +80,44 @@ export default {
         this.title = "edit"
       }
       else {
-        const port = RandomUtil.randomIntRange(10000, 60000)
-        const randomIPoctet = RandomUtil.randomIntRange(1, 255)
-        const wgKeys = (await this.genWgKey())
-        this.endpoint = createEndpoint("wireguard",{
-          tag: "wireguard-" + RandomUtil.randomSeq(3),
-          address: ['10.0.0.'+ randomIPoctet.toString() +'/32','fe80::'+ randomIPoctet.toString(16) +'/128'],
-          listen_port: port,
-          private_key: wgKeys.private_key,
-          peers: [{
-            public_key: '',
-            allowed_ips: ['0.0.0.0/0', '::/0']
-          }]
-        })
-        this.options.public_key = wgKeys.public_key
+        this.endpoint.type = "wireguard"
+        this.endpoint.listen_port = RandomUtil.randomIntRange(10000, 60000)
+        this.changeType()
         this.title = "add"
       }
       this.tab = "t1"
     },
-    changeType() {
+    async changeType() {
       // Tag change only in add endpoint
-      const tag = this.$props.id > 0 ? this.endpoint.tag : this.endpoint.type + "-" + RandomUtil.randomSeq(3)
+      const tag = this.endpoint.type + "-" + RandomUtil.randomSeq(3)
+      
       // Use previous data
-      const prevConfig = { id: this.endpoint.id, tag: tag ,listen: this.endpoint.listen, listen_port: this.endpoint.listen_port }
+      let prevConfig = {}
+      switch (this.endpoint.type) {
+        case EpTypes.Wireguard:
+          const wgKeys = (await this.genWgKey())
+          const randomIPoctet = RandomUtil.randomIntRange(1, 255)
+          prevConfig = {
+            tag: tag,
+            listen_port: this.endpoint.listen_port ?? RandomUtil.randomIntRange(10000, 60000),
+            address: ['10.0.0.'+ randomIPoctet.toString() +'/32','fe80::'+ randomIPoctet.toString(16) +'/128'],
+            private_key: wgKeys.private_key,
+            peers: [{
+              public_key: '',
+              allowed_ips: ['0.0.0.0/0', '::/0']
+            }]
+          }
+          this.options.public_key = wgKeys.public_key
+          break
+        case EpTypes.Warp:
+          prevConfig = {
+            tag: tag,
+          }
+          break
+        case EpTypes.Tailscale:
+          prevConfig = { tag: tag }
+          break
+      }
       this.endpoint = createEndpoint(this.endpoint.type, prevConfig)
     },
     closeModal() {
@@ -153,6 +171,6 @@ export default {
       }
     },
   },
-  components: { Dial, Wireguard, Warp }
+  components: { Dial, Wireguard, Warp, TailscaleVue }
 }
 </script>

@@ -256,7 +256,21 @@ export default {
       interval: "间隔",
       tolerance: "容错",
       urlTestOptions: "URL 测试选项",
-    }
+    },
+    ts: {
+      options: "Tailscale 选项",
+      stateDir: "状态目录",
+      authKey: "认证密钥",
+      controlUrl: "控制 URL",
+      ephemeral: "临时节点",
+      hostname: "主机名",
+      acceptRoutes: "接受路由",
+      exitNode: "出口节点",
+      allowLanAccess: "允许 LAN 访问",
+      advRoutes: "广告路由",
+      advExitNode: "广告出口节点",
+      udpTimeout: "UDP 超时",
+    },
   },
   in: {
     addr: "地址",

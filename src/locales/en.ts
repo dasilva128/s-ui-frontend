@@ -256,7 +256,21 @@ export default {
       interval: "Interval",
       tolerance: "Tolerance",
       urlTestOptions: "URLTest Options"
-    }
+    },
+    ts: {
+      options: "Tailscale Options",
+      stateDir: "State Directory",
+      authKey: "Authentication Key",
+      controlUrl: "Control URL",
+      ephemeral: "Ephemeral Mode",
+      hostname: "Hostname",
+      acceptRoutes: "Accept Routes",
+      exitNode: "Exit Node",
+      allowLanAccess: "Allow LAN Access",
+      advRoutes: "Advertise Routes",
+      advExitNode: "Advertise Exit Node",
+      udpTimeout: "UDP Timeout",
+    },
   },
   in: {
     addr: "Address",

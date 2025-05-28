@@ -1,5 +1,4 @@
 export default {
-  open: "打開",
   message: "歡迎",
   success: "成功",
   failed: "失敗",
@@ -257,7 +256,21 @@ export default {
       interval: "間隔",
       tolerance: "容忍度",
       urlTestOptions: "URL 測試選項"
-    }
+    },
+    ts: {
+      options: "Tailscale 選項",
+      stateDir: "狀態目錄",
+      authKey: "授權密鑰",
+      controlUrl: "控制 URL",
+      ephemeral: "臨時節點",
+      hostname: "主機名",
+      acceptRoutes: "接受路由",
+      exitNode: "出口節點",
+      allowLanAccess: "允許 LAN 訪問",
+      advRoutes: "廣告路由",
+      advExitNode: "廣告出口節點",
+      udpTimeout: "UDP 超時",
+    },
   },
   in: {
     addr: "地址",

@@ -44,7 +44,7 @@
           <v-row>
             <v-col>{{ $t('types.wg.peers') }}</v-col>
             <v-col>
-              {{ item.peers.length?? '-'  }}
+              {{ item.peers?.length?? '-'  }}
             </v-col>
           </v-row>
           <v-row>

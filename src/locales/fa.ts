@@ -256,7 +256,21 @@ export default {
       interval: "فاصله زمانی",
       tolerance: "تحمل",
       urlTestOptions: "گزینه‌های URLTest"
-    }
+    },
+    ts: {
+      options: "گزینه‌های Tailscale",
+      stateDir: "مسیر پوشه وضعیت",
+      authKey: "کلید احراز هویت",
+      controlUrl: "درگاه کنترل",
+      ephemeral: "حالت موقتی",
+      hostname: "نام هاست",
+      acceptRoutes: "پذیرش مسیرها",
+      exitNode: "درگاه خروج",
+      allowLanAccess: "دسترسی به LAN",
+      advRoutes: "تبلیغ مسیرها",
+      advExitNode: "تبلیغ درگاه خروج",
+      udpTimeout: "مهلت UDP",
+    },
   },
   in: {
     addr: "آدرس",

@@ -256,7 +256,21 @@ export default {
       interval: "Интервал",
       tolerance: "Толерантность",
       urlTestOptions: "Параметры теста URL"
-    }
+    },
+    ts: {
+      options: "Параметры Tailscale",
+      stateDir: "Каталог состояния",
+      authKey: "Ключ аутентификации",
+      controlUrl: "URL управления",
+      ephemeral: "Эфемерный",
+      hostname: "Имя хоста",
+      acceptRoutes: "Принять маршруты",
+      exitNode: "Выходной узел",
+      allowLanAccess: "Разрешить доступ LAN",
+      advRoutes: "Рекламируемые маршруты",
+      advExitNode: "Рекламируемый выходной узел",
+      udpTimeout: "Таймаут UDP",
+    },
   },
   in: {
     addr: "Адрес",

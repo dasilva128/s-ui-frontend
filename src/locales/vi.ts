@@ -256,7 +256,21 @@ export default {
       interval: "Khoảng thời gian",
       tolerance: "Sự dung hòa",
       urlTestOptions: "Tùy chọn Kiểm tra URL",
-    }
+    },
+    ts: {
+      options: "Tùy chọn Tailscale",
+      stateDir: "Thư mục Trạng thái",
+      authKey: "Khóa Xác thực",
+      controlUrl: "URL Cấu hình",
+      ephemeral: "Tạm thời",
+      hostname: "Tên máy chủ",
+      acceptRoutes: "Chấp nhận Đường dẫn",
+      exitNode: "Nút thoát",
+      allowLanAccess: "Cho phép Truy cập LAN",
+      advRoutes: "Quảng bá Đường dẫn",
+      advExitNode: "Quảng bá Nút thoát",
+      udpTimeout: "Thời gian Chờ UDP",
+    },
   },
   in: {
     addr: "Địa chỉ",
