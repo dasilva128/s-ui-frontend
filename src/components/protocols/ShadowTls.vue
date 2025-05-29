@@ -17,6 +17,9 @@
         v-model="data.password">
         </v-text-field>
       </v-col>
+      <v-col cols="12" sm="6" md="4" v-if="Inbound.wildcard_sni != undefined">
+        <v-select label="Wildcard SNI" :items="['off', 'authed', 'all']" clearable v-model="Inbound.wildcard_sni"></v-select>
+      </v-col>
     </v-row>
     <v-row>
       <v-col cols="12" sm="6" md="4">
@@ -120,6 +123,7 @@ export default {
         case 1:
           delete this.Inbound.password
           delete this.Inbound.handshake_for_server_name
+          delete this.Inbound.wildcard_sni
           break
         case 2:
           if (!this.Inbound.password) {
@@ -128,11 +132,15 @@ export default {
           if (!this.Inbound.handshake_for_server_name) {
             this.Inbound.handshake_for_server_name = {}
           }
+          delete this.Inbound.wildcard_sni
           break
         case 3:
           delete this.Inbound.password
           if (!this.Inbound.handshake_for_server_name) {
             this.Inbound.handshake_for_server_name = {}
+          }
+          if (!this.Inbound.wildcard_sni) {
+            this.Inbound.wildcard_sni = ""
           }
           break
         }

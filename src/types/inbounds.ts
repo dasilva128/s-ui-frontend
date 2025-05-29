@@ -106,6 +106,7 @@ export interface ShadowTLS extends InboundBasics {
     [server_name: string]: ShadowTLSHandShake
   }
   strict_mode?: boolean
+  wildcard_sni?: string
 }
 export interface VLESS extends InboundBasics {
   multiplex?: iMultiplex
