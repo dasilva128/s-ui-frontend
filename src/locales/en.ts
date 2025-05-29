@@ -443,6 +443,14 @@ export default {
     },
     exp: {
       storeFakeIp: "Store Fake IP",
+      extController: "External Controller",
+      extUi: "External UI",
+      extUiDownloadUrl: "UI Download URL",
+      extUiDownloadDetour: "UI Download detour",
+      secret: "Secret",
+      defaultMode: "Default Mode",
+      allowOrigin: "Allow Origin",
+      allowPrivate: "Allow Private Network",
     },
   },
   tls: {
@@ -483,6 +491,7 @@ export default {
     download: "Download",
     volume: "Volume",
     usage: "Usage",
+    enable: "Enable Statistics",
     graphTitle: "Traffic Chart",
     B: "B",
     KB: "KB",

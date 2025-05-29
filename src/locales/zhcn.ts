@@ -443,6 +443,14 @@ export default {
     },
     exp: {
       storeFakeIp: "持久化 Fake-IP",
+      extController: "外部控制器",
+      extUi: "外部界面",
+      extUiDownloadUrl: "界面下载地址",
+      extUiDownloadDetour: "界面下载绕行",
+      secret: "密钥",
+      defaultMode: "默认模式",
+      allowOrigin: "允许来源",
+      allowPrivate: "允许私有网络",
     },
   },
   tls : {
@@ -483,6 +491,7 @@ export default {
     download: "下载",
     volume: "流量",
     usage: "已用",
+    enable: "启用统计",
     graphTitle: "流量图表",
     B: "B",
     KB: "KB",

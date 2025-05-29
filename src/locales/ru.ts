@@ -443,6 +443,14 @@ export default {
     },
     exp: {
       storeFakeIp: "Хранить поддельный IP",
+      extController: "Внешний контроллер",
+      extUi: "Внешний интерфейс",
+      extUiDownloadUrl: "URL загрузки интерфейса",
+      extUiDownloadDetour: "Обход загрузки интерфейса",
+      secret: "Секрет",
+      defaultMode: "Режим по умолчанию",
+      allowOrigin: "Разрешить источник",
+      allowPrivate: "Разрешить частную сеть"
     },
   },
   tls: {
@@ -483,6 +491,7 @@ export default {
     download: "Скачивание",
     volume: "Объем",
     usage: "Использование",
+    enable: "Включить статистику",
     graphTitle: "График трафика",
     B: "Б",
     KB: "КБ",

@@ -443,6 +443,14 @@ export default {
     },
     exp: {
       storeFakeIp: "Lưu IP Giả mạo",
+      extController: "Trình điều khiển bên ngoài",
+      extUi: "Giao diện người dùng bên ngoài",
+      extUiDownloadUrl: "URL tải giao diện",
+      extUiDownloadDetour: "Chuyển hướng tải giao diện",
+      secret: "Mã bí mật",
+      defaultMode: "Chế độ mặc định",
+      allowOrigin: "Cho phép nguồn gốc",
+      allowPrivate: "Cho phép mạng riêng",
     },
   },
   tls : {
@@ -483,6 +491,7 @@ export default {
     download: "Tải xuống",
     volume: "Thể tích",
     usage: "Sử dụng",
+    enable: "Kích hoạt thống kê",
     graphTitle: "Biểu đồ lưu lượng",
     B: "B",
     KB: "KB",

@@ -443,6 +443,14 @@ export default {
     },
     exp: {
       storeFakeIp: "ذخیره آدرس‌های نامعتبر",
+      extController: "کنترل‌گر خارجی",
+      extUi: "رابط‌کاربری خارجی",
+      extUiDownloadUrl: "آدرس دانلود رابط‌کاربری",
+      extUiDownloadDetour: "خروجی دانلود رابط‌کاربری",
+      secret: "رمز",
+      defaultMode: "حالت پیش‌فرض",
+      allowOrigin: "اجازه از مبدا",
+      allowPrivate: "اجازه شبکه خصوصی",
     },
   },
   tls: {
@@ -483,6 +491,7 @@ export default {
     download: "دانلود",
     volume: "حجم",
     usage: "استفاده",
+    enable: "فعال سازی گزارش ترافیک",
     graphTitle: "نمودار ترافیک",
     B: "ب",
     KB: "ک‌ب",
