@@ -96,7 +96,7 @@ const tsTags = computed((): any[] => {
 })
 
 const ssTags = computed((): any[] => {
-  return Data().inbounds?.filter((o:any) => o.type == "shadowsocks" && o.managed)?.map((o:any) => o.tag)
+  return Data().inbounds?.filter((o:any) => o.type == "shadowsocks" && !o.users)?.map((o:any) => o.tag)
 })
 
 const inTags = computed((): any[] => {

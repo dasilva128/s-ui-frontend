@@ -255,7 +255,7 @@ const inbounds = computed((): any[] => {
 
 const inboundTags = computed((): any[] => {
   if (!inbounds.value) return []
-  return inbounds.value?.filter(i => i.tag != "" && i.users && !i.managed).map(i => { return { title: i.tag, value: i.id } })
+  return inbounds.value?.filter(i => i.tag != "" && i.users).map(i => { return { title: i.tag, value: i.id } })
 })
 
 const groups = computed((): string[] => {
