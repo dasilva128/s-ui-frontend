@@ -48,6 +48,7 @@
               <ShadowTls v-if="inbound.type == inTypes.ShadowTLS" direction="in" :data="inbound" :outTags="outTags" />
               <Tuic v-if="inbound.type == inTypes.TUIC" direction="in" :data="inbound" />
               <Tun v-if="inbound.type == inTypes.Tun" :data="inbound" />
+              <AnyTls v-if="inbound.type == inTypes.AnyTls" :data="inbound" direction="in" />
               <TProxy v-if="inbound.type == inTypes.TProxy" :inbound="inbound" />
               <Transport v-if="Object.hasOwn(inbound,'transport')" :data="inbound" />
               <Users v-if="hasUser" :clients="clients" :data="initUsers" />
@@ -108,6 +109,7 @@ import Naive from '@/components/protocols/Naive.vue'
 import ShadowTls from '@/components/protocols/ShadowTls.vue'
 import Tuic from '@/components/protocols/Tuic.vue'
 import Tun from '@/components/protocols/Tun.vue'
+import AnyTls from '@/components/protocols/AnyTls.vue'
 import InTls from '@/components/tls/InTLS.vue'
 import TProxy from '@/components/protocols/TProxy.vue'
 import Multiplex from '@/components/Multiplex.vue'
@@ -125,7 +127,7 @@ export default {
       loading: false,
       side: "s",
       inTypes: InTypes,
-      inboundWithUsers: ['mixed', 'socks', 'http', 'shadowsocks', 'vmess', 'trojan', 'naive', 'hysteria', 'shadowtls', 'tuic', 'hysteria2', 'vless'],
+      inboundWithUsers: ['mixed', 'socks', 'http', 'shadowsocks', 'vmess', 'trojan', 'naive', 'hysteria', 'shadowtls', 'tuic', 'hysteria2', 'vless', 'anytls'],
       initUsers: {
         model: 'none',
         values: <any>[],
@@ -140,6 +142,7 @@ export default {
         InTypes.Trojan,
         InTypes.Hysteria,
         InTypes.VLESS,
+        InTypes.AnyTls,
         InTypes.TUIC,
         InTypes.Hysteria2,
         InTypes.Naive,
@@ -153,8 +156,9 @@ export default {
         InTypes.TUIC,
         InTypes.Hysteria2,
         InTypes.VLESS,
+        InTypes.AnyTls,
       ],
-      OnlyTLS: [InTypes.Hysteria, InTypes.Hysteria2, InTypes.TUIC, InTypes.Naive ],
+      OnlyTLS: [InTypes.Hysteria, InTypes.Hysteria2, InTypes.TUIC, InTypes.Naive, InTypes.AnyTls ],
     }
   },
   methods: {
@@ -260,8 +264,8 @@ export default {
   },
   components: {
     Listen, InTls, Hysteria2, Naive, Direct, Shadowsocks,
-    Users, Hysteria, ShadowTls, TProxy, Multiplex, Tuic, Tun, Transport,
-    AddrVue, OutJsonVue
+    Users, Hysteria, ShadowTls, TProxy, Multiplex, Tuic, Tun,
+    AnyTls, Transport, AddrVue, OutJsonVue
   }
 }
 </script>

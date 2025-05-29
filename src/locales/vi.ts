@@ -286,6 +286,11 @@ export default {
       stun: "Máy chủ STUN",
       options: "Tùy chọn DERP",
     },
+    anytls: {
+      idleInterval: "Khoảng kiểm tra phiên nhàn rỗi",
+      idleTimeout: "Thời gian chờ phiên nhàn rỗi",
+      minIdle: "Số phiên nhàn rỗi tối thiểu"
+    },
   },
   in: {
     addr: "Địa chỉ",
@@ -407,7 +412,8 @@ export default {
         predefined: "Định nghĩa sẵn",
         rewriteTtl: "Ghi đè TTL",
         clientSubnet: "Subnet của máy khách",
-        rcode: {
+        rcode: "Máy chủ tên",
+        rcodes: {
           noError: "OK",
           formerr: "Yêu cầu không hợp lệ",
           servFail: "Lỗi máy chủ",

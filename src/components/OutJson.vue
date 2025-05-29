@@ -72,6 +72,7 @@
       </template>
     </v-row>
     <Headers :data="inData.out_json" v-if="type == inTypes.HTTP" />
+    <AnyTls v-if="type == inTypes.AnyTls" :data="inData.out_json" direction="out_json" />
   </v-card>
 </template>
 
@@ -80,6 +81,7 @@ import { InTypes } from '@/types/inbounds'
 import Network from './Network.vue'
 import UoT from './UoT.vue'
 import Headers from './Headers.vue'
+import AnyTls from './protocols/AnyTls.vue'
 
 export default {
   props: ['inData', 'type'],
@@ -118,6 +120,6 @@ export default {
       set(v:string) { this.$props.inData.out_json.packet_encoding = v != "none" ? v : undefined }
     },
   },
-  components: { Network, UoT, Headers }
+  components: { Network, UoT, Headers, AnyTls }
 }
 </script>

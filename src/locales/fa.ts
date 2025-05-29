@@ -286,6 +286,11 @@ export default {
       stun: "سرور STUN",
       options: "گزینه‌های DERP",
     },
+    anytls: {
+      idleInterval: "فاصله بررسی جلسه غیرفعال",
+      idleTimeout: "زمان پایان جلسه غیرفعال",
+      minIdle: "حداقل جلسات غیرفعال",
+    },
   },
   in: {
     addr: "آدرس",

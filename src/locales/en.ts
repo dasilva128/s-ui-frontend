@@ -286,6 +286,11 @@ export default {
       stun: "STUN Server",
       options: "DERP Options",
     },
+    anytls: {
+      idleInterval: "Idle Session Check Interval",
+      idleTimeout: "Idle Session Timeout",
+      minIdle: "Minimum Idle Session",
+    },
   },
   in: {
     addr: "Address",

@@ -286,6 +286,11 @@ export default {
       stun: "Сервер STUN",
       options: "Параметры DERP",
     },
+    anytls: {
+      idleInterval: "Интервал проверки неактивных сессий",
+      idleTimeout: "Тайм-аут неактивной сессии",
+      minIdle: "Минимум неактивных сессий"
+    },
   },
   in: {
     addr: "Адрес",

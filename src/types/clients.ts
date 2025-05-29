@@ -44,7 +44,6 @@ type Config = {
 }
 
 export function updateConfigs(configs: Config, newUserName: string): Config {
-
   for (const key in configs) {
     if (configs.hasOwnProperty(key)) {
       const config = configs[key]
@@ -55,7 +54,6 @@ export function updateConfigs(configs: Config, newUserName: string): Config {
       }
     }
   }
-
   return configs
 }
 
@@ -98,6 +96,10 @@ export function randomConfigs(user: string): Config {
       name: user,
       uuid: uuid,
       flow: "xtls-rprx-vision",
+    },
+    anytls: {
+      name: user,
+      password: mixedPassword,
     },
     trojan: {
       name: user,

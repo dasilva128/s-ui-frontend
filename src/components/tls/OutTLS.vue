@@ -273,7 +273,7 @@ export default {
       set(newValue: boolean) { this.$props.outbound.tls.insecure = newValue ? true : undefined }
     },
     tlsOptional(): boolean {
-      return !['hysteria','hysteria2','tuic','shadowtls'].includes(this.$props.outbound.type)
+      return !['hysteria','hysteria2','tuic','shadowtls', 'anytls'].includes(this.$props.outbound.type)
     },
     echConfigText: {
       get(): string { return this.tls.ech?.config ? this.tls.ech.config.join('\n') : '' },

@@ -15,6 +15,7 @@ export const OutTypes = {
   ShadowTLS: 'shadowtls',
   TUIC: 'tuic',
   Hysteria2: 'hysteria2',
+  AnyTls: 'anytls',
   Tor: 'tor',
   SSH: 'ssh',
   Selector: 'selector',
@@ -168,6 +169,16 @@ export interface Hysteria2 extends OutboundBasics, Dial {
   brutal_debug?: boolean
 }
 
+export interface AnyTls extends OutboundBasics, Dial {
+  server: string
+  server_port: number
+  password: string
+  idle_session_check_interval: string
+  idle_session_timeout: string
+  min_idle_session: number
+  tls: oTls
+}
+
 export interface Tor extends OutboundBasics, Dial {
   executable_path?: string
   extra_args?: string[]
@@ -229,6 +240,7 @@ const defaultValues: Record<OutType, Outbound> = {
   vless: { type: OutTypes.VLESS, tls: {}, multiplex: {}, transport: {} },
   tuic: { type: OutTypes.TUIC, congestion_control: 'cubic', tls: { enabled: true } },
   hysteria2: { type: OutTypes.Hysteria2, tls: { enabled: true } },
+  anytls: { type: OutTypes.AnyTls, tls: { enabled: true } },
   tor: { type: OutTypes.Tor, executable_path: './tor', data_directory: '$HOME/.cache/tor', torrc: { ClientOnly: 1 } },
   ssh: { type: OutTypes.SSH },
   selector: { type: OutTypes.Selector },

@@ -17,6 +17,7 @@ export const InTypes = {
   TUIC: 'tuic',
   Hysteria2: 'hysteria2',
   VLESS: 'vless',
+  AnyTls: 'anytls',
   Tun: 'tun',
   Redirect: 'redirect',
   TProxy: 'tproxy',
@@ -111,6 +112,12 @@ export interface ShadowTLS extends InboundBasics {
 export interface VLESS extends InboundBasics {
   multiplex?: iMultiplex
   transport?: Transport
+  tls: iTls
+}
+
+export interface AnyTls extends InboundBasics {
+  padding_scheme: string[]
+  tls: iTls
 }
 export interface TUIC extends InboundBasics {
   congestion_control: ""|"cubic"|"new_reno"|"bbr"
@@ -183,6 +190,7 @@ type InterfaceMap = {
   tuic: TUIC
   hysteria2: Hysteria2
   vless: VLESS
+  anytls: AnyTls
   tun: Tun
   redirect: Redirect
   tproxy: TProxy
@@ -206,6 +214,7 @@ const defaultValues: Record<InType, Inbound> = {
   tuic: <TUIC>{ type: InTypes.TUIC, congestion_control: "cubic", tls_id: 0 },
   hysteria2: <Hysteria2>{ type: InTypes.Hysteria2, tls_id: 0 },
   vless: <VLESS>{ type: InTypes.VLESS, tls_id: 0, multiplex: {}, transport: {} },
+  anytls: <AnyTls>{ type: InTypes.AnyTls, tls_id: 0 },
   tun: <Tun>{ type: InTypes.Tun, mtu: 9000, stack: 'system', udp_timeout: '5m', auto_route: false },
   redirect: <Redirect>{ type: InTypes.Redirect },
   tproxy: <TProxy>{ type: InTypes.TProxy },

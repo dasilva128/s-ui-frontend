@@ -58,6 +58,7 @@
               <Vless v-if="outbound.type == outTypes.VLESS" :data="outbound" />
               <Tuic v-if="outbound.type == outTypes.TUIC" direction="out" :data="outbound" />
               <Hysteria2 v-if="outbound.type == outTypes.Hysteria2" direction="out" :data="outbound" />
+              <AnyTls v-if="outbound.type == outTypes.AnyTls" :data="outbound" direction="out" />
               <Tor v-if="outbound.type == outTypes.Tor" :data="outbound" />
               <Ssh v-if="outbound.type == outTypes.SSH" :data="outbound" />
               <Selector v-if="outbound.type == outTypes.Selector" :data="outbound" :tags="tags" />
@@ -127,6 +128,7 @@ import Ssh from '@/components/protocols/Ssh.vue'
 import Selector from '@/components/protocols/Selector.vue'
 import UrlTest from '@/components/protocols/UrlTest.vue'
 import HttpUtils from '@/plugins/httputil'
+import AnyTls from '@/components/protocols/AnyTls.vue'
 export default {
   props: ['visible', 'data', 'id', 'tags'],
   emits: ['close', 'save'],
@@ -194,6 +196,6 @@ export default {
   components: { Dial, Multiplex, Transport, OutTLS,
     Direct, Socks, Http, Shadowsocks, Vmess, Trojan,
     Wireguard, Hysteria, ShadowTls, Vless, Tuic,
-    Hysteria2, Tor, Ssh, Selector, UrlTest }
+    Hysteria2, AnyTls, Tor, Ssh, Selector, UrlTest }
 }
 </script>

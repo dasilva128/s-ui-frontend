@@ -286,6 +286,11 @@ export default {
       stun: "STUN 服務器",
       options: "DERP 選項",
     },
+    anytls: {
+      idleInterval: "閒置會話檢查間隔",
+      idleTimeout: "閒置會話逾時",
+      minIdle: "最小閒置會話數"
+    },
   },
   in: {
     addr: "地址",
@@ -407,7 +412,8 @@ export default {
         predefined: "預設",
         rewriteTtl: "重寫 TTL",
         clientSubnet: "用戶端子網",
-        rcode: {
+        rcode: "回應碼",
+        rcodes: {
           noError: "正常",
           formerr: "請求錯誤",
           servFail: "伺服器故障",
