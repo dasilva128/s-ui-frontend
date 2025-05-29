@@ -247,6 +247,7 @@ export default {
       if (this.$props.id > 0) return false
       if (!this.inboundWithUsers.includes(this.inbound.type)) return false
       if (this.inbound.type == InTypes.ShadowTLS && (<ShadowTLS>this.inbound).version < 3 ) return false
+      if ((<any>this.inbound).managed) return false
       return true
     }
   },
