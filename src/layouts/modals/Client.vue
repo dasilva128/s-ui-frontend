@@ -188,7 +188,7 @@
 </template>
 
 <script lang="ts">
-import { createClient, randomConfigs, updateConfigs, Link, Client } from '@/types/clients'
+import { createClient, randomConfigs, updateConfigs, Link } from '@/types/clients'
 import DatePick from '@/components/DateTime.vue'
 import { HumanReadable } from '@/plugins/utils'
 import Data from '@/store/modules/data'

@@ -25,7 +25,6 @@
         <Derp v-if="srv.type == srvTypes.DERP" :data="srv" :inTags="inTags" :outTags="outTags" :tsTags="tsTags" />
         <SSMapi v-if="srv.type == srvTypes.SSMAPI" :data="srv" :ssTags="ssTags" />
         <InTLS v-if="HasTls.includes(srv.type)"  :inbound="srv" :tlsConfigs="tlsConfigs" :tls_id="srv.tls_id" />
-        <pre dir="ltr">{{ srv }}</pre>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>

@@ -28,7 +28,7 @@
         <v-text-field v-model="data.hostname" :label="$t('types.ts.hostname')"></v-text-field>
       </v-col>
       <v-col cols="12" sm="6" md="4" v-if="optionUdpTimeout">
-        <v-text-field type="number" v-model.number="udpTimeout" :label="$t('types.ts.udpTimeout')"></v-text-field>
+        <v-text-field type="number" v-model.number="udpTimeout" min="1" :suffix="$t('date.s')" :label="$t('types.ts.udpTimeout')"></v-text-field>
       </v-col>
     </v-row>
     <v-row v-if="optionExitNode">
