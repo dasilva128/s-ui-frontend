@@ -29,6 +29,49 @@
       </v-btn>
     </v-col>
   </v-row>
+    <v-row>
+    <v-col class="v-card-subtitle" cols="12">{{ $t('basic.routing.title') }} </v-col>
+    <v-col cols="12">
+        <v-row>
+          <v-col cols="12" sm="6" md="3" lg="2">
+            <v-select
+              hide-details
+              :label="$t('basic.routing.defaultOut')"
+              clearable
+              @click:clear="delete appConfig.route.final"
+              :items="outboundTags"
+              v-model="appConfig.route.final">
+            </v-select>
+          </v-col>
+          <v-col cols="12" sm="6" md="3" lg="2">
+            <v-text-field
+              v-model="appConfig.route.default_interface"
+              hide-details
+              clearable
+              @click:clear="delete appConfig.route.default_interface"
+              :label="$t('basic.routing.defaultIf')"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="6" md="3" lg="2">
+            <v-text-field
+              v-model.number="routeMark"
+              hide-details
+              type="number"
+              min="0"
+              :label="$t('basic.routing.defaultRm')"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="6" md="3" lg="2">
+            <v-switch
+              v-model="appConfig.route.auto_detect_interface"
+              color="primary"
+              :label="$t('basic.routing.autoBind')"
+              hide-details>
+            </v-switch>
+          </v-col>
+        </v-row>
+      </v-col>
+  </v-row>
   <v-row>
     <v-col class="v-card-subtitle" cols="12">{{ $t('rule.ruleset') }}</v-col>
     <v-col cols="12" sm="4" md="3" lg="2" v-for="(item, index) in <any[]>rulesets" :key="item.tag">
@@ -169,6 +212,11 @@ const appConfig = computed((): Config => {
 
 onMounted(async () => {
   oldConfig.value = JSON.parse(JSON.stringify(Data().config))
+})
+
+const routeMark = computed({
+  get() { return appConfig.value.route.default_mark?? 0 },
+  set(v:number) { v>0 ? appConfig.value.route.default_mark = v : delete appConfig.value.route.default_mark }
 })
 
 const stateChange = computed(() => {
