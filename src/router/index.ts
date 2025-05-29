@@ -60,6 +60,11 @@ const routes = [
         component: () => import('@/views/Basics.vue'),
       },
       {
+        path: '/dns',
+        name: 'pages.dns',
+        component: () => import('@/views/Dns.vue'),
+      },
+      {
         path: '/admins',
         name: 'pages.admins',
         component: () => import('@/views/Admins.vue'),

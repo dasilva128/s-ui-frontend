@@ -23,20 +23,22 @@
             <RuleOptions
               :rule="r"
               :clients="clients"
-              :inTags="inTags" />
+              :inTags="inTags"
+              :ruleSets="ruleSets" />
           </v-card-text>
         </v-card>
         <RuleOptions
           v-else
           :rule="ruleData.rules[0]"
           :clients="clients"
-          :inTags="inTags" />
+          :inTags="inTags"
+          :ruleSets="ruleSets" />
         <v-row>
           <v-col cols="12" sm="6" md="4">
             <v-select
               v-model="ruleData.action"
               :items="actions"
-              :label="$t('admin.action')"
+              :label="$t('dns.rule.action.title')"
               hide-details
             ></v-select>
           </v-col>
@@ -52,13 +54,13 @@
             <v-switch color="primary" v-model="ruleData.invert" :label="$t('rule.invert')" hide-details></v-switch>
           </v-col>
         </v-row>
-        <v-card subtitle="Route" v-if="['route', 'route-options'].includes(ruleData.action)">
+        <v-card :subtitle="$t('dns.rule.action.route')" v-if="['route', 'route-options'].includes(ruleData.action)">
           <v-row v-if="ruleData.action == 'route'">
             <v-col cols="12" sm="6" md="4">
               <v-select
                 v-model="ruleData.server"
                 :items="serverTags"
-                :label="$t('basic.dns.server')"
+                :label="$t('dns.server')"
                 hide-details
               ></v-select>
             </v-col>
@@ -75,17 +77,17 @@
           </v-row>
           <v-row>
             <v-col cols="12" sm="6" md="4">
-              <v-switch v-model="ruleData.disable_cache" label="Disable cache" hide-details></v-switch>
+              <v-switch v-model="ruleData.disable_cache" :label="$t('dns.disableCache')" hide-details></v-switch>
             </v-col>
             <v-col cols="12" sm="6" md="4">
-              <v-text-field v-model.number="ruleData.rewrite_ttl" type="number" min="0" label="Rewrite TTL" hide-details></v-text-field>
+              <v-text-field v-model.number="ruleData.rewrite_ttl" type="number" min="0" :label="$t('dns.rule.action.rewriteTtl')" hide-details></v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="4">
-              <v-text-field v-model="ruleData.client_subnet" label="Client subnet" hide-details></v-text-field>
+              <v-text-field v-model="ruleData.client_subnet" :label="$t('dns.rule.action.clientSubnet')" hide-details></v-text-field>
             </v-col>
           </v-row>
         </v-card>
-        <v-card subtitle="Reject" v-if="ruleData.action == 'reject'">
+        <v-card :subtitle="$t('dns.rule.action.reject')" v-if="ruleData.action == 'reject'">
           <v-row>
             <v-col cols="12" sm="6" md="4">
               <v-select
@@ -99,6 +101,31 @@
             </v-col>
             <v-col cols="12" sm="6" md="4">
               <v-switch v-model="ruleData.no_drop" :label="$t('rule.noDrop')" hide-details></v-switch>
+            </v-col>
+          </v-row>
+        </v-card>
+        <v-card :subtitle="$t('dns.rule.action.predefined')" v-if="ruleData.action == 'predefined'">
+          <v-row>
+            <v-col cols="12" sm="6" md="4">
+              <v-select
+                v-model="ruleData.rcode"
+                :items="predefinedRcode"
+                :label="$t('dns.rule.action.rcode')"
+                clearable
+                @click:clear="delete ruleData.rcode"
+                hide-details>
+              </v-select>
+            </v-col>
+          </v-row>
+          <v-row v-if="ruleData.rcode == 'NOERROR'">
+            <v-col cols="12" sm="8">
+              <v-text-field v-model="answer" :label="$t('dns.rule.action.answer') + ' ' + $t('commaSeparated')" hide-details></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="8">
+              <v-text-field v-model="ns" :label="$t('dns.rule.action.ns') + ' ' + $t('commaSeparated')" hide-details></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="8">
+              <v-text-field v-model="extra" :label="$t('dns.rule.action.extra') + ' ' + $t('commaSeparated')" hide-details></v-text-field>
             </v-col>
           </v-row>
         </v-card>
@@ -126,10 +153,11 @@
 </template>
 
 <script lang="ts">
-import { logicalDnsRule, dnsRule, actionDnsRuleKeys } from '@/types/dnsrules'
+import { logicalDnsRule, dnsRule, actionDnsRuleKeys } from '@/types/dns'
 import RuleOptions from '@/components/DnsRule.vue'
+import { i18n } from '@/locales'
 export default {
-  props: ['visible', 'data', 'index', 'clients', 'inTags', 'serverTags'],
+  props: ['visible', 'data', 'index', 'clients', 'inTags', 'serverTags', 'ruleSets'],
   emits: ['close', 'save'],
   data() {
     return {
@@ -144,16 +172,25 @@ export default {
         server: 'local',
       },
       actions: [
-        { title: 'Route', value: 'route'},
-        { title: 'Route Options', value: 'route-options'},
-        { title: 'Reject', value: 'reject'},
+        { title: i18n.global.t('dns.rule.action.route'), value: 'route'},
+        { title: i18n.global.t('dns.rule.action.routeOptions'), value: 'route-options'},
+        { title: i18n.global.t('dns.rule.action.reject'), value: 'reject'},
+        { title: i18n.global.t('dns.rule.action.predefined'), value: 'predefined'},
       ],
       strategies: [
         { title: 'Prefer IPv4', value: 'prefer_ipv4' },
         { title: 'Prefer IPv6', value: 'prefer_ipv6' },
         { title: 'IPv4 Only', value: 'ipv4_only' },
         { title: 'IPv6 Only', value: 'ipv6_only' },
-      ]
+      ],
+      predefinedRcode: [
+        { title: i18n.global.t('dns.rule.action.rcodes.noError'), value: 'NOERROR' },
+        { title: i18n.global.t('dns.rule.action.rcodes.formerr'), value: 'FORMERR' },
+        { title: i18n.global.t('dns.rule.action.rcodes.servFail'), value: 'SERVFAIL' },
+        { title: i18n.global.t('dns.rule.action.rcodes.nxDomain'), value: 'NXDOMAIN' },
+        { title: i18n.global.t('dns.rule.action.rcodes.notImp'), value: 'NOTIMP' },
+        { title: i18n.global.t('dns.rule.action.rcodes.refused'), value: 'REFUSED' },
+      ],
     }
   },
   methods: {
@@ -218,6 +255,14 @@ export default {
           newRule.method = this.ruleData.method?.length > 0 ? this.ruleData.method : undefined
           newRule.no_drop = this.ruleData.no_drop? true : undefined
           break
+        case 'predefined':
+          newRule.rcode = this.ruleData.rcode?.length > 0 ? this.ruleData.rcode : undefined
+          if (this.ruleData.rcode == 'NOERROR') {
+            newRule.answer = this.ruleData.answer?.length > 0 ? this.ruleData.answer.split(',') : undefined
+            newRule.ns = this.ruleData.ns?.length > 0 ? this.ruleData.ns.split(',') : undefined
+            newRule.extra = this.ruleData.extra?.length > 0 ? this.ruleData.extra.split(',') : undefined
+          }
+          break
       }
 
       // Add rules
@@ -241,7 +286,19 @@ export default {
       set(v:boolean) {
         this.ruleData.type = v? 'logical' : 'simple'
       }
-    }
+    },
+    answer: {
+      get() { return this.ruleData.answer?.length > 0 ? this.ruleData.answer.join(',') : "" },
+      set(v:string) { this.ruleData.answer = v.length > 0 ? v.split(',') : undefined }
+    },
+    ns: {
+      get() { return this.ruleData.ns?.length > 0 ? this.ruleData.ns.join(',') : "" },
+      set(v:string) { this.ruleData.ns = v.length > 0 ? v.split(',') : undefined }
+    },
+    extra: {
+      get() { return this.ruleData.extra?.length > 0 ? this.ruleData.extra.join(',') : "" },
+      set(v:string) { this.ruleData.extra = v.length > 0 ? v.split(',') : undefined }
+    },
   },
   watch: {
     visible(newValue) {

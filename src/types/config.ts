@@ -1,6 +1,6 @@
-import { dnsRule } from './dnsrules'
 import { Inbound } from './inbounds'
 import { Outbound } from './outbounds'
+import { Dns } from './dns'
 import { Dial } from './dial'
 
 interface Log {
@@ -8,28 +8,6 @@ interface Log {
   level?: string
   output?: string
   timestamp?: boolean
-}
-
-interface Dns {
-  servers: DnsServer[]
-  rules: dnsRule[]
-  final?: string
-  strategy?: string
-  disable_cache?: boolean,
-  disable_expire?: boolean,
-  independent_cache?: boolean,
-  cache_capacity?: number,
-  reverse_mapping?: boolean,
-  client_subnet?: string,
-}
-
-interface DnsServer{
-  tag?: string,
-  address: string,
-  address_resolver?: string,
-  address_strategy?: string,
-  strategy?: string,
-  detour?: string
 }
 
 export interface Ntp extends Dial{

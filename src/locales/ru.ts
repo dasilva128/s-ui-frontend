@@ -43,6 +43,7 @@ export default {
     rules: "Правила",
     tls: "Настройки TLS",
     basics: "Основы",
+    dns: "DNS",
     admins: "Администраторы",
     settings: "Настройки",
   },
@@ -87,7 +88,9 @@ export default {
     endpoint: "Точка входа",
     config: "Настройки",
     rule: "Правило",
+    ruleset: "Набор правил",
     service: "Устройство",
+    dnsserver: "DNS сервер",
     dnsrule: "Правило DNS",
     user: "Пользователь",
     tag: "Тег",
@@ -378,9 +381,46 @@ export default {
     remote: "Удаленный",
     local: "Локальный",
   },
-  dnsrule: {
-    add: "Добавить правило DNS",
-    title: "Правила DNS"
+  dns: {
+    add: "Добавить DNS сервер",
+    title: "DNS серверы",
+    final: "Итоговый",
+    server: "Сервер",
+    firstServer: "Первый сервер",
+    addrResolver: "Разрешение адреса",
+    cacheCapacity: "Вместимость кэша",
+    disableCache: "Отключить кэш",
+    disableExpire: "Отключить истечение",
+    independentCache: "Независимый кэш",
+    reverseMapping: "Обратное отображение",
+    rule: {
+      add: "Добавить правило DNS",
+      title: "Правила DNS",
+      inet4Range: "Диапазон IPv4",
+      inet6Range: "Диапазон IPv6",
+      acceptDefault: "Принять резолверы по умолчанию",
+      action: {
+        title: "Действие",
+        route: "Маршрутизация",
+        routeOptions: "Параметры маршрутизации",
+        reject: "Отклонить",
+        predefined: "Предопределенные",
+        rewriteTtl: "Перезаписать TTL",
+        clientSubnet: "Подсеть клиента",
+        rcode: "Код ответа",
+        rcodes: {
+          noError: "ОК",
+          formerr: "Неверный запрос",
+          servFail: "Сбой сервера",
+          nxDomain: "Не найдено",
+          refused: "Отклонено",
+          notImp: "Не реализовано"
+        },
+        answer: "Ответ",
+        ns: "Серверы имён",
+        extra: "Дополнительные",
+      },
+    }
   },
   basic: {
     log: {
@@ -388,12 +428,6 @@ export default {
       level: "Уровень",
       output: "Вывод",
       timestamp: "Включить метку времени",
-    },
-    dns: {
-      final: "Итоговый",
-      server: "Сервер",
-      firstServer: "Первый сервер",
-      addrResolver: "Разрешение адреса",
     },
     routing: {
       title: "Маршрутизация",

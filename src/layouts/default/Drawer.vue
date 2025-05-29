@@ -58,6 +58,7 @@ const menu = [
   { title: 'pages.rules', icon: 'mdi-routes',  path: '/rules' },
   { title: 'pages.tls', icon: 'mdi-certificate',  path: '/tls' },
   { title: 'pages.basics', icon: 'mdi-application-cog',  path: '/basics' },
+  { title: 'pages.dns', icon: 'mdi-dns',  path: '/dns' },
   { title: 'pages.admins', icon: 'mdi-account-tie',  path: '/admins' },
   { title: 'pages.settings', icon: 'mdi-cog',  path: '/settings' },
 ]

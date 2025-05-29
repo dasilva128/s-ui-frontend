@@ -128,6 +128,18 @@
         v-model="source_port_range"></v-text-field>
       </v-col>
     </v-row>
+    <v-row v-if="optionRuleSet">
+      <v-col cols="12" sm="6">
+        <v-combobox
+          v-model="rule.rule_set"
+          :items="ruleSets"
+          :label="$t('rule.ruleset')"
+          multiple
+          chips
+          hide-details
+        ></v-combobox>
+      </v-col>
+    </v-row>
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-menu v-model="menu" :close-on-content-click="false" location="start">
@@ -160,6 +172,9 @@
             <v-list-item>
               <v-switch v-model="optionSrcPort" color="primary" :label="$t('rule.srcPortRules')" hide-details></v-switch>
             </v-list-item>
+            <v-list-item>
+              <v-switch v-model="optionRuleSet" color="primary" :label="$t('rule.ruleset')" hide-details></v-switch>
+            </v-list-item>
           </v-list>
         </v-card>
       </v-menu>
@@ -169,7 +184,7 @@
 
 <script lang="ts">
 export default {
-  props: ['rule', 'clients', 'inTags', 'rsTags', 'deleteable'],
+  props: ['rule', 'clients', 'inTags', 'rsTags', 'deleteable', 'ruleSets'],
   data() {
     return {
       menu: false,
@@ -260,6 +275,16 @@ export default {
           this.srcPortKeys.forEach(k => delete this.$props.rule[k])
         }
         this.srcPortOption = 'source_port'
+      }
+    },
+    optionRuleSet: {
+      get() { return this.$props.rule.rule_set != undefined },
+      set(v:boolean) { 
+        if (v) {
+          this.$props.rule.rule_set = []
+        } else {
+          delete this.$props.rule.rule_set
+        }
       }
     },
     domain: {

@@ -2,7 +2,7 @@
   <v-dialog transition="dialog-bottom-transition" width="800">
     <v-card class="rounded-lg">
       <v-card-title>
-        {{ $t('actions.' + title) + " Ruleset" }}
+        {{ $t('actions.' + title) + " " + $t('objects.ruleset') }}
       </v-card-title>
       <v-divider></v-divider>
       <v-card-text style="padding: 0 16px;">

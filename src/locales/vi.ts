@@ -43,6 +43,7 @@ export default {
     rules: "Quy tắc",
     tls: "Cài đặt TLS",
     basics: "Cơ bản",
+    dns: "DNS",
     admins: "Quản trị viên",
     settings: "Cài đặt",
   },
@@ -87,7 +88,9 @@ export default {
     endpoint: "Điểm cuối",
     config: "Câu hình",
     rule: "Quy tắc",
+    ruleset: "Bộ quy tắc",
     service: "Dịch vụ",
+    dnsserver: "Máy chủ DNS",
     dnsrule: "Quy tắc DNS",
     user: "Người dùng",
     tag: "Thẻ",
@@ -363,7 +366,6 @@ export default {
     srcIpRules: "IP Nguồn",
     srcPortRules: "Cổng Nguồn",
     udpDisableDomainUnmapping: "Không màm mạng tiền lập tên miền",
-    udpFallbackDelay: "Thời gian Chờ Fallback",
     udpConnect: "Kết nối UDP",
     udpTimeout: "Thời gian Chờ UDP",
     method: "Phương pháp",
@@ -379,9 +381,45 @@ export default {
     remote: "Xa",
     local: "Cục bộ",
   },
-  dnsrule: {
-    add: "Thêm Quy tắc DNS",
-    title: "Quy tắc DNS",
+  dns: {
+    add: "Thêm Máy chủ DNS",
+    title: "Máy chủ DNS",
+    final: "Cuối cùng",
+    server: "Máy chủ",
+    firstServer: "Máy chủ Đầu tiên",
+    addrResolver: "Trình phân giải Địa chỉ",
+    cacheCapacity: "Nội dung bộ nhớ",
+    disableCache: "Vô hiệu hóa bộ nhớ đệm",
+    disableExpire: "Vô hiệu hóa hệ thống",
+    independentCache: "Bộ nhớ rẽ",
+    reverseMapping: "Màm mạng tên lập",
+    rule: {
+      add: "Thêm Quy tắc DNS",
+      title: "Quy tắc DNS",
+      inet4Range: "Dải CIDR IPv4",
+      inet6Range: "Dải CIDR IPv6",
+      acceptDefault: "Chấp nhận Mặc định",
+      action: {
+        title: "Hành động",
+        route: "Định tuyến",
+        routeOptions: "Tùy chọn định tuyến",
+        reject: "Từ chối",
+        predefined: "Định nghĩa sẵn",
+        rewriteTtl: "Ghi đè TTL",
+        clientSubnet: "Subnet của máy khách",
+        rcode: {
+          noError: "OK",
+          formerr: "Yêu cầu không hợp lệ",
+          servFail: "Lỗi máy chủ",
+          nxDomain: "Không tìm thấy",
+          refused: "Bị từ chối",
+          notImp: "Chưa được hỗ trợ"
+        },
+        answer: "Câu trả lời",
+        ns: "Máy chủ tên",
+        extra: "Bổ sung"
+      }
+    }
   },
   basic: {
     log: {
@@ -389,12 +427,6 @@ export default {
       level: "Mức độ",
       output: "Đầu ra",
       timestamp: "Bật Dấu thời gian",
-    },
-    dns: {
-      final: "Cuối cùng",
-      server: "Máy chủ",
-      firstServer: "Máy chủ Đầu tiên",
-      addrResolver: "Trình phân giải địa chỉ",
     },
     routing: {
       title: "Định tuyến",

@@ -43,6 +43,7 @@ export default {
     rules: "路由列表",
     tls: "TLS 设置",
     basics: "基础信息",
+    dns: "DNS",
     admins: "管理员",
     settings: "设置",
   },
@@ -87,7 +88,9 @@ export default {
     endpoint: "节点",
     config: "配置",
     rule: "规则",
+    ruleset: "规则集",
     service: "服务",
+    dnsserver: "DNS 服务器",
     dnsrule: "DNS规则",
     user: "用户",
     tag: "标签",
@@ -378,9 +381,45 @@ export default {
     remote: "远程",
     local: "本地",
   },
-  dnsrule: {
-    add: "添加 DNS 规则",
-    title: "DNS 规则"
+  dns: {
+    add: "添加 DNS 服务器",
+    title: "DNS 服务器",
+    final: "最终",
+    server: "服务器",
+    firstServer: "首选服务器",
+    addrResolver: "地址解析器",
+    cacheCapacity: "缓存容量",
+    disableCache: "禁用缓存",
+    disableExpire: "禁用过期",
+    independentCache: "独立缓存",
+    reverseMapping: "反向映射",
+    rule: {
+      add: "添加 DNS 规则",
+      title: "DNS 规则",
+      inet4Range: "IPv4 范围",
+      inet6Range: "IPv6 范围",
+      acceptDefault: "接受默认",
+      action: {
+        title: "操作",
+        route: "路由",
+        routeOptions: "路由选项",
+        reject: "拒绝",
+        predefined: "预定义",
+        rewriteTtl: "重写 TTL",
+        clientSubnet: "客户端子网",
+        rcode: {
+          noError: "正常",
+          formerr: "请求错误",
+          servFail: "服务器故障",
+          nxDomain: "未找到",
+          refused: "被拒绝",
+          notImp: "未实现"
+        },
+        answer: "回答",
+        ns: "名称服务器",
+        extra: "附加"
+      }
+    }
   },
   basic: {
     log: {
@@ -388,12 +427,6 @@ export default {
       level: "级别",
       output: "输出",
       timestamp: "启用时间戳",
-    },
-    dns: {
-      final: "最终",
-      server: "服务器",
-      firstServer: "首选服务器",
-      addrResolver: "地址解析器",
     },
     routing: {
       title: "路由",
