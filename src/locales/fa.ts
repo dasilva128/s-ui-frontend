@@ -28,9 +28,11 @@ export default {
   commaSeparated: "(جداشده با کاما)",
   count: "تعداد",
   template: "الگو",
+  editor: "ویرایشگر",
   error: {
     dplData: "داده تکراری",
     core: "خطا در سینگ‌باکس",
+    invalidData: "داده نامعتبر",
   },
   pages: {
     login: "ورود",

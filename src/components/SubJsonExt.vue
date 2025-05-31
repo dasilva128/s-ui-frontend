@@ -1,5 +1,13 @@
 <template>
-  <v-card>
+  <v-row>
+    <v-col>
+      <v-switch v-model="enableEditor" color="primary" :label="$t('editor')" hide-details />
+    </v-col>
+    <v-col cols="auto">
+      <v-alert v-if="!validJson" variant="text" type="warning" density="compact" icon="mdi-alert-circle-outline" :text="$t('error.invalidData')"></v-alert>
+    </v-col>
+  </v-row>
+  <v-card v-if="!enableEditor">
     <v-row>
       <v-col cols="12" sm="6" md="3">
         <v-select
@@ -129,14 +137,20 @@
       </v-menu>
     </v-card-actions>
   </v-card>
+  <v-card v-else :loading="!validJson">
+    <Editor v-model="settings.subJsonExt" @update:modelValue="loadData" dir="ltr" />
+  </v-card>
 </template>
 
 <script lang="ts">
+import Editor from './Editor.vue'
 export default {
   props: ['settings'],
   data() {
     return {
       menu: false,
+      enableEditor: false,
+      validJson: true,
       subJsonExt: <any>{},
       levels: ["trace", "debug", "info", "warn", "error", "fatal", "panic"],
       defaultLog: {
@@ -423,6 +437,20 @@ export default {
     }
   },
   methods: {
+    loadData() {
+      if (this.$props.settings?.subJsonExt?.length>0){
+        try {
+            this.subJsonExt = JSON.parse(this.$props.settings.subJsonExt)
+            this.validJson = true
+        } catch (e) {
+            this.validJson = false
+            return
+        }
+      } else {
+        this.validJson = true
+        this.subJsonExt = <any>{}
+      }
+    },
     updateRuleSets(){
       let tags = <string[]>[]
       if (this.dns?.rules?.length>0) this.dns.rules.forEach((r:any) => { if (r.rule_set) tags.push(...r.rule_set) })
@@ -436,7 +464,7 @@ export default {
     }
   },
   mounted(){
-    this.subJsonExt = this.$props.settings?.subJsonExt?.length>0 ? JSON.parse(this.$props.settings.subJsonExt) : <any>{}
+    this.loadData()
   },
   watch:{
     subJsonExt:{
@@ -445,6 +473,7 @@ export default {
       },
       deep: true
     },
-  }
+  },
+  components: { Editor }
 }
 </script>

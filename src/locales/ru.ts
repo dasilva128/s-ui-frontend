@@ -28,9 +28,11 @@ export default {
   commaSeparated: "(разделено запятыми)",
   count: "Количество",
   template: "Шаблон",
+  editor: "Редактор",
   error: {
     dplData: "Дублирующие данные",
     core: "Ошибка Sing-Box",
+    invalidData: "Неверные данные",
   },
   pages: {
     login: "Вход",

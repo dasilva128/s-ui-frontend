@@ -28,9 +28,11 @@ export default {
   commaSeparated: "（逗號分隔）",
   count: "計數",
   template: "模板",
+  editor: "編輯器",
   error: {
     dplData: "重複數據",
     core: "Sing-Box 錯誤",
+    invalidData: "無效數據",
   },
   pages: {
     login: "登錄",

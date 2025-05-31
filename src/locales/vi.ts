@@ -28,9 +28,11 @@ export default {
   commaSeparated: "(được phân tách bằng dấu phẩy)",
   count: "Đếm",
   template: "Mẫu",
+  editor: "Bản sử dụng",
   error: {
     dplData: "Dữ liệu trùng lặp",
     core: "Lỗi Sing-Box",
+    invalidData: "Dữ liệu khỏ hợp lệ",
   },
   pages: {
     login: "Đăng nhập",

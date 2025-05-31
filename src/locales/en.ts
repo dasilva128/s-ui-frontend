@@ -28,9 +28,11 @@ export default {
   commaSeparated: "(comma separated)",
   count: "Count",
   template: "Template",
+  editor: "Editor",
   error: {
     dplData: "Duplicate Data",
     core: "Sing-Box Error",
+    invalidData: "Invalid Data",
   },
   pages: {
     login: "Login",
