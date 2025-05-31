@@ -45,21 +45,30 @@
     </v-row>
     <v-row v-if="enableDns">
       <v-col cols="12" sm="6" md="3" lg="2">
-        <v-text-field
-          v-model="proxyDns"
+        <v-select
           hide-details
-          :label="$t('setting.globalDns')"
-        ></v-text-field>
+          :label="$t('dns.final')"
+          :items="dnsTags"
+          v-model="subJsonExt.dns.final">
+        </v-select>
       </v-col>
       <v-col cols="12" sm="6" md="3" lg="2">
-        <v-text-field
-          v-model="directDns"
-          hide-details
-          clearable
-          :label="$t('setting.directDns')"
-        ></v-text-field>
+        <SimpleDNS :data="proxyDns" :label="$t('setting.globalDns')" />
       </v-col>
-      <v-col cols="12" sm="6" md="3" v-if="directDns.length>0">
+      <v-col cols="12" sm="6" md="3" lg="2">
+        <SimpleDNS :data="directDns" :label="$t('setting.directDns')" />
+      </v-col>
+    </v-row>
+    <v-row v-if="enableDns">
+      <v-col cols="12" sm="6" md="3" lg="2">
+        <v-select
+          hide-details
+          :label="$t('basic.routing.defaultDns')"
+          :items="dnsTags"
+          v-model="subJsonExt.default_domain_resolver">
+        </v-select>
+      </v-col>
+      <v-col cols="12" sm="6" md="3">
         <v-select
           v-model="dnsToDirect"
           :items="geositeList"
@@ -138,12 +147,13 @@
     </v-card-actions>
   </v-card>
   <v-card v-else :loading="!validJson">
-    <Editor v-model="settings.subJsonExt" @update:modelValue="loadData" dir="ltr" />
+    <Editor v-model="settings.subJsonExt" @update:modelValue="validateJson" @unfocus="loadData" dir="ltr" />
   </v-card>
 </template>
 
 <script lang="ts">
 import Editor from './Editor.vue'
+import SimpleDNS from './SimpleDNS.vue'
 export default {
   props: ['settings'],
   data() {
@@ -202,14 +212,21 @@ export default {
       defaultDns: {
         "servers": [
           {
-            "address": "tcp://8.8.8.8",
+            "type": "tcp",
+            "tag": "proxy-dns",
+            "server": "8.8.8.8",
+            "server_port": 53,
             "detour": "proxy",
             "address_resolver": "local-dns",
-            "tag": "proxy-dns"
+          },
+          { 
+            "tag": "direct-dns",
+            "type": "local",
+            "detour": "direct"
           },
           {
             "tag": "local-dns",
-            "address": "local",
+            "type": "local",
             "detour": "direct"
           }
         ],
@@ -224,15 +241,20 @@ export default {
             "server": "proxy-dns"
           },
           {
+            "clash_mode": "Direct",
+            "action": "route",
+            "server": "direct-dns"
+          },
+          {
             "source_ip_cidr": [
               "172.19.0.0/30",
               "fdfe:dcba:9876::1/126"
             ],
             "action": "route",
             "server": "proxy-dns"
-          }
+          },
         ],
-        "final": "local-dns",
+        "final": "proxy-dns",
         "strategy": "prefer_ipv4"
       },
       geositeList: [
@@ -350,25 +372,32 @@ export default {
     },
     dns():any { return this.subJsonExt?.dns?? undefined },
     proxyDns: {
-      get() :string { return this.dns?.servers[0]?.address?? "" },
-      set(v:string) { this.dns.servers[0].address = v.length>0 ? v : "8.8.8.8" }
+      get() :any { return this.dns?.servers?.findLast((d:any) => d.tag == "proxy-dns")?? {} },
+      set(v:any) { 
+        let sIndex = this.dns.servers.findIndex((d:any) => d.tag == "proxy-dns")
+        console.log(sIndex)
+        if (sIndex === -1 || sIndex == undefined) {
+          this.dns.servers.push({ ...this.defaultDns.servers[0], ...v })
+        } else {
+          this.dns.servers[sIndex] = { ...this.defaultDns.servers[0], ...v }
+        }
+      }
     },
     directDns: {
-      get() :string { return this.dns?.servers?.findLast((d:any) => d.tag == "direct-dns")?.address?? "" },
-      set(v:string) {
+      get() :any { return this.dns?.servers?.findLast((d:any) => d.tag == "direct-dns")?? {} },
+      set(v:any) {
         const sIndex = this.dns.servers.findIndex((d:any) => d.tag == "direct-dns")
-        if (v?.length>0) {
-          if (sIndex === -1) {
-            this.dns.servers.push({ tag: "direct-dns", address: v, detour: "direct" })
-            this.dns.rules.push({ clash_mode: "Direct", action: "route", server: "direct-dns" })
-          } else {
-            this.dns.servers[sIndex].address = v
-          }
+        if (sIndex === -1 || sIndex == undefined) {
+          this.dns.servers.push({ ...this.defaultDns.servers[1], ...v })
         } else {
-          this.dns.servers.splice(sIndex,1)
-          this.dns.rules = this.dns.rules.filter((r:any) => r.server != "direct-dns")
+          this.dns.servers[sIndex] = { ...this.defaultDns.servers[1], ...v }
         }
       },
+    },
+    dnsTags() { return this.dns?.servers?.map((d:any) => d.tag) ?? [] },
+    final: {
+      get() :string { return this.dns.final?? "" },
+      set(v:string) { this.dns.final = v.length>0 ? v : undefined }
     },
     dnsToDirect: {
       get() :string[] {
@@ -437,18 +466,23 @@ export default {
     }
   },
   methods: {
-    loadData() {
-      if (this.$props.settings?.subJsonExt?.length>0){
-        try {
-            this.subJsonExt = JSON.parse(this.$props.settings.subJsonExt)
-            this.validJson = true
-        } catch (e) {
-            this.validJson = false
-            return
-        }
-      } else {
+    validateJson() {
+      if (this.$props.settings?.subJsonExt?.length == 0) {
         this.validJson = true
-        this.subJsonExt = <any>{}
+        return
+      }
+      try {
+        JSON.parse(this.$props.settings.subJsonExt)
+        this.validJson = true
+      } catch (e) {
+        this.validJson = false
+      }
+    },
+    loadData() {
+      if (this.$props.settings?.subJsonExt?.length>0 && this.validJson){
+        this.subJsonExt = JSON.parse(this.$props.settings.subJsonExt)
+      } else {
+        if (this.validJson) this.subJsonExt = <any>{}
       }
     },
     updateRuleSets(){
@@ -474,6 +508,6 @@ export default {
       deep: true
     },
   },
-  components: { Editor }
+  components: { Editor, SimpleDNS }
 }
 </script>

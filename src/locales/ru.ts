@@ -441,6 +441,7 @@ export default {
       defaultOut: "Исходящий по умолчанию",
       defaultIf: "Сетевой интерфейс по умолчанию",
       defaultRm: "Маршрут по умолчанию",
+      defaultDns: "DNS по умолчанию",
       autoBind: "Автопривязка сетевого интерфейса",
     },
     exp: {

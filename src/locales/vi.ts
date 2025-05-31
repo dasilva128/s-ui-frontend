@@ -441,6 +441,7 @@ export default {
       defaultOut: "Ra ngoài Mặc định",
       defaultIf: "NIC Mặc định",
       defaultRm: "Đánh dấu Định tuyến Mặc định",
+      defaultDns: "Máy chủ DNS Mặc định",
       autoBind: "Tự động Ràng buộc NIC",
     },
     exp: {

@@ -441,6 +441,7 @@ export default {
       defaultOut: "خروجی پیش‌فرض",
       defaultIf: "کارت شبکه پیش‌فرض",
       defaultRm: "Routing Mark پیش‌فرض",
+      defaultDns: "حل کننده دامنه پیش‌فرض",
       autoBind: "انتخاب اتوماتیک کارت شبکه",
     },
     exp: {

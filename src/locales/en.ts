@@ -441,6 +441,7 @@ export default {
       defaultOut: "Default Outbound",
       defaultIf: "Default NIC",
       defaultRm: "Default Routing Mark",
+      defaultDns: "Default DNS Resolver",
       autoBind: "Auto Bind NIC",
     },
     exp: {

@@ -441,6 +441,7 @@ export default {
       defaultOut: "默認外部",
       defaultIf: "默認網卡",
       defaultRm: "默認路由標記",
+      defaultDns: "默認 DNS 解析器",
       autoBind: "自動綁定網卡",
     },
     exp: {

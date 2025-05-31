@@ -24,6 +24,7 @@ interface Route {
   auto_detect_interface?: boolean
   default_interface?: string
   default_mark?: number
+  default_domain_resolver: string
 }
 
 interface RouteRule       {
