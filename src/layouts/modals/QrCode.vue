@@ -41,6 +41,12 @@
             </v-row>
             <v-row>
               <v-col style="text-align: center;">
+                <v-chip>{{ $t('setting.clashSub') }}</v-chip><br />
+                <QrcodeVue :value="clientSub + '?format=clash'" :size="size" @click="copyToClipboard(clientSub + '?format=clash')" :margin="1" style="border-radius: 1rem; cursor: copy;" />
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col style="text-align: center;">
                 <v-chip>SING-BOX (scan only)</v-chip><br />
                 <QrcodeVue :value="singbox" :size="size" :margin="1" style="border-radius: .8rem; cursor: not-allowed;" />
               </v-col>
