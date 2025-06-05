@@ -178,6 +178,9 @@ export default {
     toDirectDns: "路由到直連 DNS",
     jsonSubOptions: "其他選項",
     excludePkg: "排除包",
+    clashSub: "Clash 訂閱",
+    mixedPort: "混合入站端口",
+    tun: "Tun 入站",
   },
   client: {
     name: "名稱",

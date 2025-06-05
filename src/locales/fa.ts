@@ -178,6 +178,9 @@ export default {
     toDirectDns: "هدایت به DNS مستقیم",
     jsonSubOptions: "گزینه‌های دیگر",
     excludePkg: "نرم‌افزارهای استثنا",
+    clashSub: "سابسکریپشن CLASH",
+    mixedPort: "ورودی Mixed",
+    tun: "ورودی TUN",
   },
   client: {
     name: "نام",

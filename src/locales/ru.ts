@@ -178,6 +178,9 @@ export default {
     toDirectDns: "Маршрутизация на Direct DNS",
     jsonSubOptions: "Другие параметры",
     excludePkg: "Исключить пакеты",
+    clashSub: "Clash подписка",
+    mixedPort: "Смешанный порт",
+    tun: "Tun инбоунд",
   },
   client: {
     name: "Имя",

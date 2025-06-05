@@ -1,13 +1,13 @@
 <template>
-  <v-row>
-    <v-col>
-      <v-switch v-model="enableEditor" color="primary" :label="$t('editor')" hide-details />
-    </v-col>
-    <v-col cols="auto">
-      <v-alert v-if="!validJson" variant="text" type="warning" density="compact" icon="mdi-alert-circle-outline" :text="$t('error.invalidData')"></v-alert>
-    </v-col>
-  </v-row>
-  <v-card v-if="!enableEditor">
+  <Editor
+    v-model="enableEditor"
+    :data="settings.subJsonExt"
+    :visible="enableEditor"
+    :title="$t('editor') + ' - ' + $t('setting.jsonSub')"
+    @close="enableEditor = false"
+    @save="saveEditor"
+    />
+  <v-card>
     <v-row>
       <v-col cols="12" sm="6" md="3">
         <v-select
@@ -123,6 +123,7 @@
     </template>
     <v-card-actions>
       <v-spacer></v-spacer>
+      <v-btn @click="openEditor" variant="outlined" hide-details>{{ $t('editor') }}</v-btn>
       <v-menu v-model="menu" :close-on-content-click="false" location="start">
         <template v-slot:activator="{ props }">
           <v-btn v-bind="props" hide-details variant="tonal">{{ $t('setting.jsonSubOptions') }}</v-btn>
@@ -146,21 +147,19 @@
       </v-menu>
     </v-card-actions>
   </v-card>
-  <v-card v-else :loading="!validJson">
-    <Editor v-model="settings.subJsonExt" @update:modelValue="validateJson" @unfocus="loadData" dir="ltr" />
-  </v-card>
 </template>
 
 <script lang="ts">
 import Editor from './Editor.vue'
 import SimpleDNS from './SimpleDNS.vue'
+import { push } from 'notivue'
+import { i18n } from '@/locales'
 export default {
   props: ['settings'],
   data() {
     return {
       menu: false,
       enableEditor: false,
-      validJson: true,
       subJsonExt: <any>{},
       levels: ["trace", "debug", "info", "warn", "error", "fatal", "panic"],
       defaultLog: {
@@ -466,23 +465,11 @@ export default {
     }
   },
   methods: {
-    validateJson() {
-      if (this.$props.settings?.subJsonExt?.length == 0) {
-        this.validJson = true
-        return
-      }
-      try {
-        JSON.parse(this.$props.settings.subJsonExt)
-        this.validJson = true
-      } catch (e) {
-        this.validJson = false
-      }
-    },
     loadData() {
-      if (this.$props.settings?.subJsonExt?.length>0 && this.validJson){
+      if (this.$props.settings?.subJsonExt?.length>0){
         this.subJsonExt = JSON.parse(this.$props.settings.subJsonExt)
       } else {
-        if (this.validJson) this.subJsonExt = <any>{}
+        this.subJsonExt = <any>{}
       }
     },
     updateRuleSets(){
@@ -495,6 +482,21 @@ export default {
         delete this.subJsonExt.rule_set
       }
       if (this.rules.length == 0) delete this.subJsonExt.rules
+    },
+    openEditor() {
+      this.enableEditor = true
+    },
+    saveEditor(data:string) {
+      try {
+        this.subJsonExt = JSON.parse(data)
+      } catch (e) {
+        push.error({
+          message: i18n.global.t('failed') + ": " + i18n.global.t('error.invalidData'),
+          duration: 5000,
+        })
+        return
+      }
+      this.enableEditor = false
     }
   },
   mounted(){

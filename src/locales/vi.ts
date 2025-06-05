@@ -178,6 +178,9 @@ export default {
     toDirectDns: "Chuyển hướng tới DNS Trực tiếp",
     jsonSubOptions: "Tùy chọn Khác",
     excludePkg: "Loại trừ Gói",
+    clashSub: "Clash đăng ký",
+    mixedPort: "Cổng khóa",
+    tun: "Tun đăng ký",
   },
   client: {
     name: "Tên",

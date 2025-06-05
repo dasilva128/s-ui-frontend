@@ -178,6 +178,9 @@ export default {
     toDirectDns: "Route to Direct DNS",
     jsonSubOptions: "Other Options",
     excludePkg: "Exclude Packages",
+    clashSub: "Clash Subscription",
+    mixedPort: "Mixed Inbound Port",
+    tun: "Tun Inbound",
   },
   client: {
     name: "Name",
