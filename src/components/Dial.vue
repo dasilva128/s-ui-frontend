@@ -67,11 +67,12 @@
     </v-row>
     <v-row v-if="optionDR">
       <v-col cols="12" sm="6" md="4">
-        <v-text-field
+        <v-select
           hide-details
           :label="$t('dial.domainResolver')"
+          :items="dnsTags"
           v-model="dial.domain_resolver">
-        </v-text-field>
+        </v-select>
       </v-col>
     </v-row>
     <v-card-actions class="pt-0">
@@ -120,6 +121,8 @@
 </template>
 
 <script lang="ts">
+import Data from '@/store/modules/data'
+
 export default {
   props: ['dial', 'outTags'],
   data() {
@@ -185,8 +188,9 @@ export default {
     },
     optionDR: {
       get(): boolean { return this.$props.dial.domain_resolver != undefined },
-      set(v:boolean) { this.$props.dial.domain_resolver = v ?'local' : undefined }
-    }
+      set(v:boolean) { this.$props.dial.domain_resolver = v ? this.dnsTags[0]?? '' : undefined }
+    },
+    dnsTags() {return Data().config.dns?.servers?.map((d:any) => d.tag) ?? []}
   }
 }
 </script>
