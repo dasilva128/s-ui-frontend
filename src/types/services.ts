@@ -21,6 +21,7 @@ export interface DERP extends SrvBasics {
   config_path: string
   verify_client_endpoint?: string[]
   verify_client_url?: any[]
+  home?: string
   mesh_with?: any[]
   mesh_psk?: string
   mesh_psk_file?: string

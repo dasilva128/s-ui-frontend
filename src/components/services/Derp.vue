@@ -9,6 +9,16 @@
         </v-text-field>
       </v-col>
     </v-row>
+    <v-row v-if="optionHome">
+      <v-col cols="12" sm="8">
+        <v-text-field
+        :label="$t('pages.home')"
+        hide-details
+        placeholder="blank | http[s]://example.com:port/path"
+        v-model="data.home">
+        </v-text-field>
+      </v-col>
+    </v-row>
     <v-row v-if="optionVerifyCE">
       <v-col cols="12" sm="8">
         <v-select
@@ -145,6 +155,9 @@
               <v-switch v-model="optionVerifyCU" color="primary" :label="$t('types.derp.verifyClientUrl')" hide-details></v-switch>
             </v-list-item>
             <v-list-item>
+              <v-switch v-model="optionHome" color="primary" :label="$t('pages.home')" hide-details></v-switch>
+            </v-list-item>
+            <v-list-item>
               <v-switch v-model="optionMesh" color="primary" :label="$t('types.derp.meshWith')" hide-details></v-switch>
             </v-list-item>
             <v-list-item>
@@ -171,30 +184,34 @@ export default {
   },
   computed: {
     optionVerifyCE: {
-        get() { return this.$props.data.verify_client_endpoint != undefined },
-        set(v: boolean) { this.$props.data.verify_client_endpoint = v ? [] : undefined }
+      get() { return this.$props.data.verify_client_endpoint != undefined },
+      set(v: boolean) { this.$props.data.verify_client_endpoint = v ? [] : undefined }
     },
     optionVerifyCU: {
-        get() { return this.$props.data.verify_client_url != undefined },
-        set(v: boolean) { this.$props.data.verify_client_url = v ? [{ url: '' }] : undefined }
+      get() { return this.$props.data.verify_client_url != undefined },
+      set(v: boolean) { this.$props.data.verify_client_url = v ? [{ url: '' }] : undefined }
+    },
+    optionHome: {
+      get() { return this.$props.data.home != undefined },
+      set(v: boolean) { this.$props.data.home = v ? '' : undefined }
     },
     optionMesh: {
-        get() { return this.$props.data.mesh_with != undefined },
-        set(v: boolean) {
-          if (v) {
-            this.$props.data.mesh_with = [{tls: {}}]
-            delete this.$props.data.mesh_psk_file
-            this.$props.data.mesh_psk = ''
-          } else {
-            delete this.$props.data.mesh_with
-            delete this.$props.data.mesh_psk_file
-            delete this.$props.data.mesh_psk
-          }
+      get() { return this.$props.data.mesh_with != undefined },
+      set(v: boolean) {
+        if (v) {
+          this.$props.data.mesh_with = [{tls: {}}]
+          delete this.$props.data.mesh_psk_file
+          this.$props.data.mesh_psk = ''
+        } else {
+          delete this.$props.data.mesh_with
+          delete this.$props.data.mesh_psk_file
+          delete this.$props.data.mesh_psk
         }
+      }
     },
     optionStun: {
-        get() { return this.$props.data.stun != undefined },
-        set(v: boolean) { this.$props.data.stun = v ? {enabled: true} : undefined }
+      get() { return this.$props.data.stun != undefined },
+      set(v: boolean) { this.$props.data.stun = v ? {enabled: true} : undefined }
     }
   },
   components: { Dial, Listen, OutTLS },
