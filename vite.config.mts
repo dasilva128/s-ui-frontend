@@ -5,14 +5,14 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 // Utilities
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
-import { randomBytes } from 'crypto';
+import { randomBytes } from 'crypto'
 
 function getUniqueFileName(template) {
   if (template.includes('.js') || template.includes('.css')) {
-    const hash = randomBytes(8).toString('hex');
-    return template.replace('[name]', hash);
+    const hash = randomBytes(8).toString('hex')
+    return template.replace('[name]', hash)
   }
-  return template;
+  return template
 }
 
 export default defineConfig({
@@ -31,15 +31,16 @@ export default defineConfig({
   build: {
     manifest: false,
     outDir: 'dist',
-    chunkSizeWarningLimit: 1600,
+    chunkSizeWarningLimit: 2000,
     rollupOptions: {
       output: {
         inlineDynamicImports: true,
         entryFileNames: getUniqueFileName('assets/[name].js'),
         chunkFileNames: getUniqueFileName('assets/[name].js'),
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name == "index.css") return getUniqueFileName('assets/[name].css');
-          return 'assets/' + assetInfo.name;
+          if (assetInfo.names.some(name => name.endsWith('.css')))
+            return getUniqueFileName('assets/[name].css')
+          return 'assets/' + assetInfo.names[0]
         },
       },
     }
