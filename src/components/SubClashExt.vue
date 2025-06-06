@@ -121,13 +121,6 @@ export default {
           "MATCH,Proxy"
         ]
       },
-      geositeList: [
-        { title: "Private", value: "geosite-private" },
-        { title: "Ads", value: "geosite-ads" },
-        { title: "🇮🇷 Iran", value: "geosite-ir" },
-        { title: "🇨🇳 China", value: "geosite-cn" },
-        { title: "🇻🇳 Vietnam", value: "geosite-vn" },
-      ],
       geoList: [
         { title: "Site-Private", value: "geoip-private" },
         { title: "IP-Private", value: "geosite-private" },
@@ -159,7 +152,8 @@ export default {
     },
     saveEditor(data:string) {
       try {
-        yaml.parse(data)
+        const result = yaml.parse(data)
+        if (typeof result != 'object' || Array.isArray(result)) throw new Error()
       } catch (e) {
         push.error({
           message: i18n.global.t('failed') + ": " + i18n.global.t('error.invalidData'),
@@ -184,12 +178,14 @@ export default {
     metaJson: {
       get() {
         try {
-          return yaml.parse(this.settings.subClashExt)
+          return yaml.parse(this.settings.subClashExt)??{}
         } catch (e) {
           return {}
         }
       },
-      set(v:any) { this.settings.subClashExt = yaml.stringify(v) }
+      set(v:any) {
+        this.settings.subClashExt = Object.keys(v).length==0 ? "" : yaml.stringify(v)
+      }
     },
     optionMixed: {
       get() { return this.metaJson['mixed-port']>0 },
