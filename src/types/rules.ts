@@ -63,7 +63,7 @@ export interface rule extends generalRule {
   user_id?: number[]
   clash_mode?: string
   rule_set?: string[]
-  rule_set_ipcidr_match_source?: boolean
+  rule_set_ip_cidr_match_source?: boolean
 }
 
 export interface ruleset {

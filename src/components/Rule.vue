@@ -158,7 +158,7 @@
         ></v-combobox>
       </v-col>
       <v-col cols="12" sm="6">
-        <v-switch v-model="rule.rule_set_ipcidr_match_source" color="primary" :label="$t('rule.rulesetMatchSrc')" hide-details></v-switch>
+        <v-switch v-model="rule.rule_set_ip_cidr_match_source" color="primary" :label="$t('rule.rulesetMatchSrc')" hide-details></v-switch>
       </v-col>
     </v-row>
     <v-card-actions>
@@ -303,10 +303,10 @@ export default {
       set(v:boolean) { 
         if (v) {
           this.$props.rule.rule_set = []
-          this.$props.rule.rule_set_ipcidr_match_source = false
+          this.$props.rule.rule_set_ip_cidr_match_source = false
         } else {
           delete this.$props.rule.rule_set
-          delete this.$props.rule.rule_set_ipcidr_match_source
+          delete this.$props.rule.rule_set_ip_cidr_match_source
         }
       }
     },
