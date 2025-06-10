@@ -8,6 +8,7 @@
         :items="['udp','tcp','local','tls','quic','h3']"
         @update:model-value="updateType($event)"
         density="compact"
+        :class="data.type != 'local' ? 'noGutters' : ''"
         v-model="data.type">
       </v-select>
     </v-col>
@@ -16,6 +17,7 @@
         v-model="data.server"
         :label="$t('in.addr')"
         density="compact"
+        class="noGutters"
         hide-details>
       </v-text-field>
     </v-col>
@@ -25,6 +27,7 @@
         :label="$t('in.port')"
         density="compact"
         type="number"
+        class="noGutters"
         min="1"
         hide-details>
       </v-text-field>
@@ -48,3 +51,11 @@ export default {
   }
 }
 </script>
+
+<style>
+.noGutters .v-field__input,
+.noGutters .v-field {
+  text-align: center !important;
+  padding-inline-end: 0 !important;
+}
+</style>
