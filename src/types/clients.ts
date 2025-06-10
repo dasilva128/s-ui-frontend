@@ -57,6 +57,43 @@ export function updateConfigs(configs: Config, newUserName: string): Config {
   return configs
 }
 
+export function shuffleConfigs(configs: Config, key?: string) {
+  const keys = key ? [key] : Object.keys(configs)
+  keys.forEach(k => {
+    switch (k) {
+      case "mixed":
+      case "socks":
+      case "http":
+      case "anytls":
+      case "trojan":
+      case "naive":
+      case "hysteria2":
+        configs[k].password = RandomUtil.randomSeq(10)
+        break
+      case "shadowsocks":
+        configs[k].password = RandomUtil.randomShadowsocksPassword(32)
+        break
+      case "shadowsocks16":
+        configs[k].password = RandomUtil.randomShadowsocksPassword(16)
+        break
+      case "shadowtls":
+        configs[k].password = RandomUtil.randomShadowsocksPassword(32)
+        break
+      case "hysteria":
+        configs[k].auth_str = RandomUtil.randomSeq(10)
+        break
+      case "tuic":
+        configs[k].password = RandomUtil.randomSeq(10)
+        configs[k].uuid = RandomUtil.randomUUID()
+        break
+      case "vmess":
+      case "vless":
+        configs[k].uuid = RandomUtil.randomUUID()
+        break
+    }
+  })
+}
+
 export function randomConfigs(user: string): Config {
   const mixedPassword = RandomUtil.randomSeq(10)
   const ssPassword16 = RandomUtil.randomShadowsocksPassword(16)

@@ -92,9 +92,15 @@
               </v-row>
             </v-window-item>
             <v-window-item value="t2">
+              <v-row>
+                <v-col cols="12" sm="6" md="4">
+                  <v-btn variant="tonal" @click="shuffle()">{{ $t('reset') + ' - ' + $t('all') }}<v-icon icon="mdi-refresh" /></v-btn>
+                </v-col>
+              </v-row>
               <v-row v-for="key in Object.keys(clientConfig)">
                 <v-col cols="12" md="3" align="end" align-self="center">
                     {{ key }}
+                    <v-icon @click="shuffle(key)" icon="mdi-refresh" v-tooltip:top="$t('reset')" />
                 </v-col>
                 <v-col>
                   <v-text-field
@@ -188,7 +194,7 @@
 </template>
 
 <script lang="ts">
-import { createClient, randomConfigs, updateConfigs, Link } from '@/types/clients'
+import { createClient, randomConfigs, updateConfigs, Link, shuffleConfigs } from '@/types/clients'
 import DatePick from '@/components/DateTime.vue'
 import { HumanReadable } from '@/plugins/utils'
 import Data from '@/store/modules/data'
@@ -246,6 +252,9 @@ export default {
     },
     setAllInbounds(){
       this.client.inbounds = this.inboundTags.map((i:any) => i.value).sort()
+    },
+    shuffle(k?:string) {
+      shuffleConfigs(this.clientConfig, k)
     }
   },
   computed: {
