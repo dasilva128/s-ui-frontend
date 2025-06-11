@@ -25,19 +25,22 @@
                 </v-row>
               </v-card-title>
               <v-divider></v-divider>
-              <v-row>
-                <v-col cols="12" sm="6" md="4" v-for="items in menuItems">
-                  <v-card variant="flat" :title="items.title">
-                    <v-list v-for="item in items.value">
-                      <v-list-item>
-                        <v-switch
-                        v-model="reloadItems"
-                        :value="item.value"
-                        color="primary"
-                        :label="item.title"
-                        hide-details></v-switch>
-                      </v-list-item>
-                    </v-list>
+              <v-row v-for="items in menuItems" no-gutters>
+                <v-col cols="12">
+                  <v-card :subtitle="items.title" variant="flat">
+                    <v-card-text>
+                      <v-row no-gutters>
+                        <v-col cols="12" md="6" lg="3" v-for="item in items.value">
+                          <v-switch
+                          density="compact"
+                          v-model="reloadItems"
+                          :value="item.value"
+                          color="primary"
+                          :label="item.title"
+                          hide-details></v-switch>
+                        </v-col>
+                      </v-row>
+                    </v-card-text>
                   </v-card>
                 </v-col>
               </v-row>
@@ -163,6 +166,8 @@ const menuItems = [
   { title: i18n.global.t('main.gauges'), value: [
     { title: i18n.global.t('main.gauge.cpu'), value: "g-cpu" },
     { title: i18n.global.t('main.gauge.mem'), value: "g-mem" },
+    { title: i18n.global.t('main.gauge.dsk'), value: "g-dsk" },
+    { title: i18n.global.t('main.gauge.swp'), value: "g-swp" },
     ]
   },
   { title: i18n.global.t('main.charts'), value: [
@@ -170,6 +175,7 @@ const menuItems = [
     { title: i18n.global.t('main.chart.mem'), value: "h-mem" },
     { title: i18n.global.t('main.chart.net'), value: "h-net" },
     { title: i18n.global.t('main.chart.pnet'), value: "hp-net" },
+    { title: i18n.global.t('main.chart.dio'), value: "h-dio" },
     ]
   },
   { title: i18n.global.t('main.infos'), value: [

@@ -57,12 +57,15 @@ export default {
     gauge: {
       cpu: "CPU Gauge",
       mem: "RAM Gauge",
+      dsk: "Disk Gauge",
+      swp: "Swap Gauge",
     },
     chart: {
       cpu: "CPU Monitor",
       mem: "RAM Monitor",
       net: "Network Bandwidth",
       pnet: "Network Packets",
+      dio: "Disk I/O",
     },
     info: {
       sys: "System Info",

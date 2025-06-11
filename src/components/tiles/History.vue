@@ -33,7 +33,7 @@ export default {
     return {
       loaded: false,
       labels: new Array(20).fill(''),
-      oldValues: <any>{},
+      oldValues: <any>{net: {}, dio: {}},
       options1: {
         animation: false,
         responsive: true,
@@ -112,6 +112,11 @@ export default {
             return label == 0 ? "0" : HumanReadable.packetFormat(label,0)
           }
           return this.optionsNet
+        case "h-dio":
+          this.optionsNet.scales.y.ticks.callback = (label:any, index: number) => {
+            return label == 0 ? "0" : HumanReadable.sizeFormat(label,0)
+          }
+          return this.optionsNet
       }
       return this.options1
     }
@@ -178,20 +183,28 @@ export default {
           this.updateData1(v.mem.current*100/v.mem.total)
           break
         case 'h-net':
-          if (this.oldValues.sent) {
-            const downSpeed = (v.net.recv-this.oldValues.recv)/2  // Each 2 sec
-            const upSpeed = (v.net.sent-this.oldValues.sent)/2  // Each 2 sec
+          if (this.oldValues.net.sent) {
+            const downSpeed = (v.net.recv-this.oldValues.net.recv)/2  // Each 2 sec
+            const upSpeed = (v.net.sent-this.oldValues.net.sent)/2  // Each 2 sec
             this.updateData2(upSpeed,downSpeed)
           }
-          this.oldValues = v.net
+          this.oldValues.net = v.net
           break
         case 'hp-net':
-          if (this.oldValues.psent) {
-            const downSpeed = (v.net.precv-this.oldValues.precv)/2  // Each 2 sec
-            const upSpeed = (v.net.psent-this.oldValues.psent)/2  // Each 2 sec
+          if (this.oldValues.net.psent) {
+            const downSpeed = (v.net.precv-this.oldValues.net.precv)/2  // Each 2 sec
+            const upSpeed = (v.net.psent-this.oldValues.net.psent)/2  // Each 2 sec
             this.updateData2(upSpeed,downSpeed)
           }
-          this.oldValues = v.net
+          this.oldValues.net = v.net
+          break
+        case 'h-dio':
+          if (this.oldValues.dio.read) {
+            const downSpeed = (v.dio.read-this.oldValues.dio.read)/2  // Each 2 sec
+            const upSpeed = (v.dio.write-this.oldValues.dio.write)/2  // Each 2 sec
+            this.updateData2(upSpeed,downSpeed)
+          }
+          this.oldValues.dio = v.dio
           break
       }
     }

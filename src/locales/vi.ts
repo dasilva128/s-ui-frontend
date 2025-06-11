@@ -57,12 +57,15 @@ export default {
     gauge: {
       cpu: "Đồng hồ CPU",
       mem: "Đồng hồ RAM",
+      dsk: "Đồng hồ Disk",
+      swp: "Đồng hồ Swap",
     },
     chart: {
       cpu: "Máy theo dõi CPU",
       mem: "Máy theo dõi RAM",
       net: "Băng thông mạng",
       pnet: "Gói mạng",
+      dio: "Disk I/O",
     },
     info: {
       sys: "Thông tin hệ thống",

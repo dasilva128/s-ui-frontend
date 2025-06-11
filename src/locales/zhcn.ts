@@ -57,12 +57,15 @@ export default {
     gauge: {
       cpu: "CPU 仪表",
       mem: "RAM 仪表",
+      dsk: "Disk 仪表",
+      swp: "Swap 仪表",
     },
     chart: {
       cpu: "CPU 监视器",
       mem: "RAM 监视器",
       net: "网络带宽",
       pnet: "网络数据包",
+      dio: "Disk I/O",
     },
     info: {
       sys: "系统信息",

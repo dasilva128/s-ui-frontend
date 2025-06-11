@@ -14,16 +14,25 @@ const data = computed(() => {
     case 'g-cpu':
       return { percent: d.cpu, text: Math.ceil(d.cpu) + "%" }
     case 'g-mem':
-      const curr = HumanReadable.sizeFormat(d.mem.current,0).split(' ')
-      const total = HumanReadable.sizeFormat(d.mem.total,0).split(' ')
-      if (curr[1] == total[1]) curr[1] = ''
-      return {
-        percent: Math.ceil(d.mem.current*100/d.mem.total),
-        text: curr[0] + "<sup>" + (curr[1]?? ' ') + "</sup>/" +  total[0] + "<sup>" + (total[1]?? '') + "</sup>"
-      }
+      return gaugeData(d.mem)
+    case 'g-dsk':
+      return gaugeData(d.dsk)
+    case 'g-swp':
+      return gaugeData(d.swp)
   }
   return { percent: 0, text: '-'}
 })
+
+const gaugeData = (d:any) :any => {
+  if (!d) return { percent: 0, text: '-' }
+  const curr = HumanReadable.sizeFormat(d.current,0).split(' ')
+  const total = HumanReadable.sizeFormat(d.total,0).split(' ')
+  if (curr[1] == total[1]) curr[1] = ''
+  return {
+    percent: Math.ceil(d.current*100/d.total),
+    text: curr[0] + "<sup>" + (curr[1]?? ' ') + "</sup>/" +  total[0] + "<sup>" + (total[1]?? '') + "</sup>"
+  }
+}
 
 const cssTransformRotateValue = computed(() => {
   const percentageAsFraction = data.value.percent / 100
