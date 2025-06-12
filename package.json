@@ -25,12 +25,12 @@
     "vue-i18n": "^11.1.5",
     "vue-router": "^4.5.0",
     "vue3-persian-datetime-picker": "^1.2.2",
-    "vuetify": "^3.8.8",
+    "vuetify": "^3.8.9",
     "yaml": "^2.8.0"
   },
   "devDependencies": {
     "@babel/types": "^7.27.6",
-    "@types/node": "^24.0.0",
+    "@types/node": "^24.0.1",
     "@vitejs/plugin-vue": "^5.2.1",
     "eslint-plugin-vue": "^10.1.0",
     "material-design-icons-iconfont": "^6.7.0",
