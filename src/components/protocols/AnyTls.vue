@@ -3,11 +3,12 @@
     <v-card-subtitle v-if="direction != 'out_json'">AnyTls</v-card-subtitle>
     <v-row v-if="direction == 'in'">
       <v-col cols="12" sm="8">
-        <v-text-field
+        <v-textarea
         label="Padding scheme"
+        auto-grow
         hide-details
         v-model="padding_scheme">
-        </v-text-field>
+        </v-textarea>
       </v-col>
     </v-row>
     <v-row v-else>
@@ -39,7 +40,7 @@
         </v-text-field>
       </v-col>
       <v-col cols="12" sm="6" md="4">
-        <v-text-field 
+        <v-text-field
         :label="$t('types.anytls.minIdle')"
         type="number"
         min="0"
@@ -59,8 +60,8 @@ export default {
   },
   computed: {
     padding_scheme: {
-      get() { return this.data.padding_scheme?.length > 0 ? this.data.padding_scheme.join(',') : '' },
-      set(v:string) { this.data.padding_scheme = v.length > 0 ? v.split(',') : undefined }
+      get() { return this.data.padding_scheme?.length > 0 ? this.data.padding_scheme.join("\n") : '' },
+      set(v:string) { this.data.padding_scheme = v.length > 0 ? v.split("\n") : undefined }
     },
     idleInterval: {
       get() { return this.data.idle_session_check_interval?.length > 0 ? parseInt(this.data.idle_session_check_interval.replace('s','')) : 30 },
