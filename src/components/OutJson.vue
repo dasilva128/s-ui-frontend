@@ -71,6 +71,23 @@
         </v-col>
       </template>
     </v-row>
+    <v-row v-if="[inTypes.Hysteria, inTypes.Hysteria2].includes(type)">
+      <v-col cols="12" sm="8">
+        <v-text-field
+          :label="$t('rule.portRange') + ' ' + $t('commaSeparated')"
+          v-model="server_ports">
+        </v-text-field>
+      </v-col>
+      <v-col cols="12" sm="6" md="4">
+        <v-text-field
+          :label="$t('ruleset.interval')"
+          type="number"
+          min="0"
+          :suffix="$t('date.s')"
+          v-model.number="hop_interval">
+        </v-text-field>
+      </v-col>
+    </v-row>
     <Headers :data="inData.out_json" v-if="type == inTypes.HTTP" />
     <AnyTls v-if="type == inTypes.AnyTls" :data="inData.out_json" direction="out_json" />
   </v-card>
@@ -118,6 +135,14 @@ export default {
     packet_encoding: {
       get() { return this.$props.inData.out_json.packet_encoding != undefined ? this.$props.inData.out_json.packet_encoding : 'none' },
       set(v:string) { this.$props.inData.out_json.packet_encoding = v != "none" ? v : undefined }
+    },
+    server_ports: {
+      get() { return this.$props.inData.out_json.server_ports?.join(',')?? [] },
+      set(v:string) { this.$props.inData.out_json.server_ports = v.length > 0 ? v.split(',') : undefined }
+    },
+    hop_interval: {
+      get() { return this.$props.inData.out_json.hop_interval? parseInt(this.$props.inData.out_json.hop_interval.replace('s','')) : 0 },
+      set(v:number) { this.$props.inData.out_json.hop_interval = v>0 ? v + 's' : undefined }
     },
   },
   components: { Network, UoT, Headers, AnyTls }
