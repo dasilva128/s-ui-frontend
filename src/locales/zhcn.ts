@@ -478,6 +478,9 @@ export default {
     pubKey: "公钥",
     disableSni: "禁用 SNI",
     insecure: "允许不安全",
+    fragment: "启用",
+    fragmentDelay: "启用后延迟",
+    recordFragment: "启用",
     acme: {
       options: "ACME 选项",
       dataDir: "数据目录",

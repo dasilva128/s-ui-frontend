@@ -164,6 +164,24 @@
           </v-col>
         </v-row>
       </template>
+      <v-row v-if="tls.fragment != undefined">
+        <v-col cols="12" sm="6" md="4">
+          <v-switch color="primary" :label="$t('tls.fragment')" v-model="tls.fragment" hide-details></v-switch>
+        </v-col>
+        <v-col cols="12" sm="6" md="4" v-if="tls.fragment">
+          <v-switch color="primary" :label="$t('tls.recordFragment')" v-model="tls.record_fragment" hide-details></v-switch>
+        </v-col>
+        <v-col cols="12" sm="6" md="4" v-if="tls.fragment">
+          <v-text-field
+          :label="$t('tls.fragmentDelay')"
+          hide-details
+          type="number"
+          min=0
+          :suffix="$t('date.ms')"
+          v-model.number="fragmentFallbackDelay">
+          </v-text-field>
+        </v-col>
+      </v-row>
     </template>
     <v-card-actions v-if="tls.enabled">
       <v-spacer></v-spacer>
@@ -199,6 +217,9 @@
               </v-list-item>
               <v-list-item>
                 <v-switch v-model="optionEch" color="primary" label="ECH" hide-details></v-switch>
+              </v-list-item>
+              <v-list-item>
+                <v-switch v-model="optionFragment" color="primary" :label="$t('tls.fragment')" hide-details></v-switch>
               </v-list-item>
             </v-list>
           </v-card>
@@ -322,6 +343,22 @@ export default {
     optionEch: {
       get(): boolean { return this.tls.ech != undefined },
       set(v:boolean) { this.$props.outbound.tls.ech = v ? defaultOutTls.ech : undefined }
+    },
+    optionFragment: {
+      get(): boolean { return this.tls.fragment != undefined },
+      set(v:boolean) { 
+        if (v) {
+          this.$props.outbound.tls.fragment = false
+        } else {
+          delete this.$props.outbound.tls.fragment
+          delete this.$props.outbound.tls.fragment_fallback_delay
+          delete this.$props.outbound.tls.record_fragment
+        }
+      }
+    },
+    fragmentFallbackDelay: {
+      get(): number { return parseInt(this.tls.fragment_fallback_delay?.replace('ms','')?? '500')?? 500 },
+      set(v:number) { this.$props.outbound.tls.fragment_fallback_delay = v>0 ? `${v}ms` : undefined }
     }
   }
 }

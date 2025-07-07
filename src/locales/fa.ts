@@ -478,6 +478,9 @@ export default {
     pubKey: "کلید عمومی",
     disableSni: "غیرفعال‌سازی SNI",
     insecure: "تایید ارتباط ناامن",
+    fragment: "تکه‌بندی",
+    fragmentDelay: "تاخیر تکه‌بندی جایگزین",
+    recordFragment: "تکه‌بندی چندگانه",
     acme: {
       options: "گزینه‌های ACME",
       dataDir: "مسیر داده‌ها",

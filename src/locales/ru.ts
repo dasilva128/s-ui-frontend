@@ -478,6 +478,9 @@ export default {
     pubKey: "Публичный ключ",
     disableSni: "Отключить SNI",
     insecure: "Разрешить небезопасное",
+    fragment: "Фрагментация",
+    fragmentDelay: "Задержка фрагментации",
+    recordFragment: "Фрагментация записей",
     acme: {
       options: "Параметры ACME",
       dataDir: "Каталог данных",

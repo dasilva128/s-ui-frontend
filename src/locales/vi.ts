@@ -478,6 +478,9 @@ export default {
     pubKey: "Khóa Công khai",
     disableSni: "Tắt SNI",
     insecure: "Cho phép Không an toàn",
+    fragment: "Kiểm tra hệ thống",
+    fragmentDelay: "Khoảng thời gian hệ thống",
+    recordFragment: "Kiểm tra bộ nhớ",
     acme: {
       options: "Tùy chọn ACME",
       dataDir: "Thư mục Dữ liệu",

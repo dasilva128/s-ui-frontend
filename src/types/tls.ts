@@ -80,6 +80,9 @@ export interface oTls {
   cipher_suites?: string[]
   certificate?: string
   certificate_path?: string
+  fragment?: boolean
+  fragment_fallback_delay?: string
+  record_fragment?: boolean
   ech?: {
     enabled: boolean
     pq_signature_schemes_enabled?: boolean

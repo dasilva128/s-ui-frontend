@@ -478,6 +478,9 @@ export default {
     pubKey: "公鑰",
     disableSni: "停用 SNI",
     insecure: "允許不安全連線",
+    fragment: "分段",
+    fragmentDelay: "分段回應延遲",
+    recordFragment: "多筆記錄分段",
     acme: {
       options: "ACME 選項",
       dataDir: "數據目錄",

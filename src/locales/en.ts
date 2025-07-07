@@ -478,6 +478,9 @@ export default {
     pubKey: "Public Key",
     disableSni: "Disable SNI",
     insecure: "Allow Insecure",
+    fragment: "Fragment",
+    fragmentDelay: "Fragment Fallback Delay",
+    recordFragment: "Multiple records Fragmentation",
     acme: {
       options: "ACME Options",
       dataDir: "Data Directory",
