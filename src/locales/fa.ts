@@ -318,7 +318,6 @@ export default {
     udpOptions: "گزینه‌های UDP",
     detour: "انحراف مسیر",
     detourText: "ارسال به ورودی دیگر",
-    domainStrategy: "استراتژی دامنه",
   },
   dial: {
     bindIf: "اتصال به کارت شبکه",
@@ -406,6 +405,7 @@ export default {
     disableExpire: "بدون انقضا",
     independentCache: "استقلال cache",
     reverseMapping: "نگاشت معکوس",
+    domainStrategy: "استراتژی دامنه",
     rule: {
       add: "ایجاد قانون دامنه",
       title: "قوانین دامنه",

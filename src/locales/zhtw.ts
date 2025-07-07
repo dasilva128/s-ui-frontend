@@ -318,7 +318,6 @@ export default {
     udpOptions: "UDP 選項",
     detour: "繞道",
     detourText: "轉發到入站",
-    domainStrategy: "域名策略",
   },
   dial: {
     bindIf: "綁定到網路接口",
@@ -406,6 +405,7 @@ export default {
     disableExpire: "停用過期",
     independentCache: "獨立快取",
     reverseMapping: "反向映射",
+    domainStrategy: "域名策略",
     rule: {
       add: "添加 DNS 規則",
       title: "DNS 規則",

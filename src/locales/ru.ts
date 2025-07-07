@@ -318,7 +318,6 @@ export default {
     udpOptions: "Параметры UDP",
     detour: "Обход",
     detourText: "Переадресация на входящий",
-    domainStrategy: "Стратегия домена",
   },
   dial: {
     bindIf: "Привязка к сетевому интерфейсу",
@@ -406,6 +405,7 @@ export default {
     disableExpire: "Отключить истечение",
     independentCache: "Независимый кэш",
     reverseMapping: "Обратное отображение",
+    domainStrategy: "Стратегия домена",
     rule: {
       add: "Добавить правило DNS",
       title: "Правила DNS",

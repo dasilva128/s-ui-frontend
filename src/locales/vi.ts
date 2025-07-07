@@ -318,7 +318,6 @@ export default {
     udpOptions: "Tùy chọn UDP",
     detour: "Lạc đạo",
     detourText: "Chuyển tiếp tới đầu vào",
-    domainStrategy: "Chiến lược Domain",
   },
   dial: {
     bindIf: "Ràng buộc tới Giao diện Mạng",
@@ -406,6 +405,7 @@ export default {
     disableExpire: "Vô hiệu hóa hệ thống",
     independentCache: "Bộ nhớ rẽ",
     reverseMapping: "Màm mạng tên lập",
+    domainStrategy: "Chiến lược Domain",
     rule: {
       add: "Thêm Quy tắc DNS",
       title: "Quy tắc DNS",

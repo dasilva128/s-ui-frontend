@@ -46,7 +46,7 @@
         <v-col cols="12" sm="6" md="3" lg="2">
           <v-select
             hide-details
-            :label="$t('listen.domainStrategy')"
+            :label="$t('dns.domainStrategy')"
             clearable
             @click:clear="delete appConfig.dns.strategy"
             :items="['prefer_ipv4','prefer_ipv6','ipv4_only','ipv6_only']"

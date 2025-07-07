@@ -318,7 +318,6 @@ export default {
     udpOptions: "UDP Options",
     detour: "Detour",
     detourText: "Forward to inbound",
-    domainStrategy: "Domain Strategy",
   },
   dial: {
     bindIf: "Bind to Network Interface",
@@ -406,6 +405,7 @@ export default {
     disableExpire: "Disable Expire",
     independentCache: "Independent Cache",
     reverseMapping: "Reverse Mapping",
+    domainStrategy: "Domain Strategy",
     rule: {
       add: "Add Dns Rule",
       title: "Dns Rules",
