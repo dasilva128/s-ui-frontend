@@ -137,7 +137,7 @@
           <v-tooltip activator="parent" dir="ltr" location="start" v-if="item.inbounds != ''">
             <span v-for="i in item.inbounds">{{ inbounds.find(inb => inb.id == i)?.tag }}<br /></span>
           </v-tooltip>
-          {{ item.inbounds.length }}
+          {{ item.inbounds?.length }}
           </span>
         </template>
         <template v-slot:item.volume="{ item }">
